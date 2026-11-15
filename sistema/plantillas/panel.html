@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ratatuille</title>
+<!--
+  PLANTILLA DEL PANEL DE RATATUILLE
+  La IA solo sustituye el contenido del bloque de datos (el script con id «datos», más abajo). Formato en sistema/DATOS.md §8.
+  El resto no se toca salvo para arreglar algo. Los datos de ejemplo son de una familia inventada.
+-->
+<style>
+:root{
+  --bg:#faf7f2; --surface:#ffffff; --surface-2:#f3eee6; --text:#1f1b16; --muted:#6b6258;
+  --line:#e4ddd2; --accent:#b4532a; --accent-soft:#f6e3d8; --ok:#2f7d4f; --ok-soft:#dff0e5;
+  --warn:#9a6a00; --warn-soft:#fbefcc; --bad:#b3261e; --bad-soft:#f9dedc; --info-soft:#e3ecf7; --info:#2c5a8c;
+  --radius:14px; --shadow:0 1px 2px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16130f; --surface:#211d18; --surface-2:#2a251f; --text:#f2ece4; --muted:#a89d90;
+    --line:#3a332b; --accent:#e8875a; --accent-soft:#3a2418; --ok:#6cc690; --ok-soft:#1b3326;
+    --warn:#e3b341; --warn-soft:#3a2f12; --bad:#f2847b; --bad-soft:#3d1c1a; --info-soft:#1c2a3a; --info:#8fb6e3;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16130f; --surface:#211d18; --surface-2:#2a251f; --text:#f2ece4; --muted:#a89d90;
+  --line:#3a332b; --accent:#e8875a; --accent-soft:#3a2418; --ok:#6cc690; --ok-soft:#1b3326;
+  --warn:#e3b341; --warn-soft:#3a2f12; --bad:#f2847b; --bad-soft:#3d1c1a; --info-soft:#1c2a3a; --info:#8fb6e3;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:16px 16px 0;max-width:980px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+h1{font-size:1.3rem;margin:0}
+.sub{color:var(--muted);font-size:.85rem;margin:2px 0 0}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:4px;overflow-x:auto;padding:10px 16px;max-width:980px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:8px 14px;font:inherit;font-size:.95rem;cursor:pointer;min-height:40px}
+.tab-btn[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+main{max-width:980px;margin:0 auto;padding:16px}
+section.tab{display:none}
+section.tab.active{display:block}
+h2{font-size:1.15rem;margin:22px 0 10px}
+h3{font-size:1rem;margin:0 0 8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 12px;box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+ul.clean{list-style:none;margin:0;padding:0}
+ul.clean li{padding:6px 0;border-bottom:1px solid var(--line)}
+ul.clean li:last-child{border-bottom:0}
+.pill{display:inline-block;font-size:.78rem;padding:2px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted);margin-left:6px;vertical-align:middle}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.info{background:var(--info-soft);color:var(--info)}
+.days{display:flex;gap:6px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.day-btn{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;padding:6px 10px;font:inherit;font-size:.85rem;cursor:pointer;text-align:center;min-width:52px}
+.day-btn b{display:block;font-size:1.05rem}
+.day-btn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.day-btn.today{outline:2px solid var(--accent);outline-offset:-2px}
+.notice{background:var(--warn-soft);color:var(--warn);border-radius:12px;padding:10px 14px;margin:0 0 12px;font-size:.95rem}
+.who{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:baseline}
+.who .n{font-weight:600}
+.row-aparte{background:var(--info-soft);border-radius:10px;padding:6px 10px;margin-top:6px}
+.meal{padding:8px 0;border-bottom:1px solid var(--line)} .meal:last-child{border-bottom:0}
+.timeline{list-style:none;margin:8px 0 0;padding:0}
+.timeline li{display:grid;grid-template-columns:56px 1fr;gap:10px;padding:8px 0;border-top:1px dashed var(--line)}
+.timeline .h{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
+.timeline .r{font-size:.8rem;color:var(--muted)}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:10px;padding:8px 12px;font:inherit;font-size:.92rem;cursor:pointer;min-height:40px}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn:focus-visible,.tab-btn:focus-visible,.day-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.done-box{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:.9rem}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stepper button{border:0;background:var(--surface-2);color:var(--text);width:36px;height:36px;font-size:1.1rem;cursor:pointer}
+.stepper span{min-width:30px;text-align:center}
+.week{display:grid;gap:12px}
+@media (min-width:760px){ .week{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:980px){ .week{grid-template-columns:repeat(3,1fr)} }
+.aisle h3{display:flex;justify-content:space-between}
+.item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item input{width:24px;height:24px;margin-top:2px;accent-color:var(--accent);flex:0 0 auto}
+.item .t{flex:1}
+.item .q{font-weight:600}
+.item.got .t{text-decoration:line-through;color:var(--muted)}
+.item.have .t{color:var(--muted)}
+.have-btn{border:0;background:none;color:var(--info);font:inherit;font-size:.8rem;cursor:pointer;padding:4px;text-decoration:underline}
+.recipe summary{cursor:pointer;font-weight:600;list-style:none}
+.recipe summary::-webkit-details-marker{display:none}
+.recipe summary::after{content:"＋";float:right;color:var(--muted)}
+.recipe[open] summary::after{content:"－"}
+.search{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font:inherit;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.8rem}
+.inv-urgente{color:var(--bad);font-weight:600} .inv-pronto{color:var(--warn);font-weight:600}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
+.toast.show{opacity:1}
+footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);font-size:.8rem}
+@media print{
+  nav,.btns,.done-box,.have-btn,.days,.no-print,.search{display:none!important}
+  body{background:#fff;color:#000;font-size:12pt}
+  section.tab{display:none!important}
+  section.tab.print-yes{display:block!important;page-break-after:always}
+  .card{box-shadow:none;border-color:#ccc;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <h1 id="titulo">Ratatuille</h1>
+      <p class="sub" id="subtitulo"></p>
+    </div>
+    <button class="btn no-print" id="imprimir" type="button" aria-label="Imprimir o guardar en PDF">🖨️ PDF</button>
+  </div>
+</header>
+<nav aria-label="Secciones"><div class="tabs" role="tablist" id="tabs"></div></nav>
+<main>
+  <section class="tab" id="tab-hoy" role="tabpanel"></section>
+  <section class="tab print-yes" id="tab-semana" role="tabpanel"></section>
+  <section class="tab print-yes" id="tab-compra" role="tabpanel"></section>
+  <section class="tab" id="tab-recetas" role="tabpanel"></section>
+  <section class="tab" id="tab-historico" role="tabpanel"></section>
+  <section class="tab" id="tab-casa" role="tabpanel"></section>
+  <section class="tab" id="tab-como" role="tabpanel"></section>
+</main>
+<footer id="pie"></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script id="datos" type="application/json">
+{
+  "casa": "Casa de ejemplo",
+  "actualizado": "2026-11-13T19:30",
+  "plataforma": "claude",
+  "semana": { "inicio": "2026-11-16", "fin": "2026-11-22", "titulo": "Semana del 16 al 22 de noviembre" },
+  "dias": [
+    {
+      "fecha": "2026-11-16",
+      "ayer_listo": ["El tupper de Javi (albóndigas) se pasó anoche del congelador a la nevera"],
+      "comidas": [
+        { "comida": "Comida", "hora": "12:30", "raciones": [ { "quien": "Pablo", "plato": "Lentejas con verduras, chafadas y sin sal", "origen": "Se cocina hoy", "aparte": true } ] },
+        { "comida": "Comida", "hora": "14:00", "raciones": [
+          { "quien": "Marta", "plato": "Lentejas con verduras", "origen": "Se cocina hoy" },
+          { "quien": "Javi", "plato": "Albóndigas en salsa (tupper)", "origen": "Congelador, descongelado ayer" },
+          { "quien": "Lucía", "plato": "Come en el comedor", "origen": "—" }
+        ] },
+        { "comida": "Cena", "hora": "20:30", "raciones": [ { "quien": "Todos", "plato": "Ideas: tortilla de calabacín, o crema de calabaza con huevo duro", "origen": "Idea, con lo que hay" } ] }
+      ],
+      "sesiones": [
+        { "cocinero": "Rosa", "inicio": "10:00", "fin": "12:45", "pasos": [
+          { "hora": "10:00", "paso": "Lavar y picar las verduras de las lentejas", "recurso": "manos", "manos": true },
+          { "hora": "10:20", "paso": "Rehogar las verduras", "recurso": "fuego 1", "manos": true },
+          { "hora": "10:30", "paso": "Añadir las lentejas y el agua; cocer tapado", "recurso": "fuego 1", "manos": false },
+          { "hora": "11:20", "paso": "Apartar la ración de Pablo ANTES de la sal y chafarla", "recurso": "manos", "manos": true },
+          { "hora": "11:25", "paso": "Sazonar el resto y dejar reposar", "recurso": "fuego 1", "manos": true },
+          { "hora": "12:15", "paso": "Enfriar, repartir y guardar (ver «Al terminar»)", "recurso": "manos", "manos": true }
+        ] }
+      ],
+      "guardar": ["2 tuppers de lentejas a la nevera: Javi martes y miércoles", "1 ración de lentejas a la nevera: Marta y Pablo, martes", "1 ración al congelador, con etiqueta y fecha"],
+      "manana": ["Nada que descongelar"],
+      "plan_b": "Si las lentejas no salen a tiempo: tortilla francesa con pan y tomate, 10 min",
+      "ideas": []
+    },
+    {
+      "fecha": "2026-11-17",
+      "ayer_listo": ["Lentejas en la nevera (de ayer)"],
+      "comidas": [
+        { "comida": "Comida", "hora": "12:30", "raciones": [ { "quien": "Pablo", "plato": "Lentejas sin sal (de ayer)", "origen": "Nevera", "aparte": true } ] },
+        { "comida": "Comida", "hora": "14:00", "raciones": [
+          { "quien": "Marta", "plato": "Lentejas con verduras", "origen": "Nevera, de ayer" },
+          { "quien": "Javi", "plato": "Lentejas con verduras (tupper)", "origen": "Nevera, de ayer" }
+        ] }
+      ],
+      "sesiones": [],
+      "guardar": [],
+      "manana": ["Esta noche: pasar 1 bandeja de pollo del congelador a la nevera"],
+      "plan_b": "Si no quedan lentejas: merluza del congelador a la plancha con arroz, 15 min",
+      "ideas": ["Cena: hummus con crudités (gasta el bote de garbanzos que caduca)"]
+    },
+    {
+      "fecha": "2026-11-18",
+      "ayer_listo": ["Pollo descongelándose en la nevera desde anoche"],
+      "comidas": [
+        { "comida": "Comida", "hora": "12:30", "raciones": [ { "quien": "Pablo", "plato": "Pollo al horno con boniato, en trozos blandos y sin sal", "origen": "Se cocina hoy", "aparte": true } ] },
+        { "comida": "Comida", "hora": "14:00", "raciones": [
+          { "quien": "Marta", "plato": "Pollo al horno con boniato", "origen": "Se cocina hoy" },
+          { "quien": "Javi", "plato": "Lentejas con verduras (tupper)", "origen": "Nevera, del lunes" }
+        ] }
+      ],
+      "sesiones": [
+        { "cocinero": "Rosa", "inicio": "10:30", "fin": "12:45", "pasos": [
+          { "hora": "10:30", "paso": "Encender el horno; pelar y trocear el boniato", "recurso": "horno", "manos": true },
+          { "hora": "10:50", "paso": "Preparar el pollo en la bandeja con el boniato", "recurso": "manos", "manos": true },
+          { "hora": "11:00", "paso": "Hornear", "recurso": "horno", "manos": false },
+          { "hora": "11:00", "paso": "Mientras: judías verdes al vapor", "recurso": "fuego 2", "manos": false },
+          { "hora": "12:00", "paso": "Sacar; apartar la ración de Pablo antes de la sal", "recurso": "manos", "manos": true },
+          { "hora": "12:15", "paso": "Enfriar, repartir y guardar", "recurso": "manos", "manos": true }
+        ] }
+      ],
+      "guardar": ["2 raciones de pollo a la nevera: Marta y Javi (tupper), jueves", "1 ración de Pablo a la nevera, jueves"],
+      "manana": ["Nada que descongelar"],
+      "plan_b": "Si el pollo no está bien descongelado: huevos revueltos con judías verdes, 10 min",
+      "ideas": []
+    },
+    {
+      "fecha": "2026-11-19",
+      "ayer_listo": ["Pollo en la nevera (de ayer)"],
+      "comidas": [
+        { "comida": "Comida", "hora": "12:30", "raciones": [ { "quien": "Pablo", "plato": "Pollo con boniato sin sal (de ayer)", "origen": "Nevera", "aparte": true } ] },
+        { "comida": "Comida", "hora": "14:00", "raciones": [
+          { "quien": "Marta", "plato": "Pollo al horno con boniato y arroz", "origen": "Nevera, de ayer" },
+          { "quien": "Javi", "plato": "Pollo al horno con boniato (tupper)", "origen": "Nevera, de ayer" }
+        ] }
+      ],
+      "sesiones": [],
+      "guardar": [],
+      "manana": ["Esta noche: pasar la merluza del congelador a la nevera"],
+      "plan_b": "Si no queda pollo: la ración de lentejas del congelador (pasarla por la mañana a la nevera y calentarla bien)",
+      "ideas": []
+    },
+    {
+      "fecha": "2026-11-20",
+      "ayer_listo": ["Merluza descongelándose en la nevera desde anoche"],
+      "comidas": [
+        { "comida": "Comida", "hora": "12:30", "raciones": [ { "quien": "Pablo", "plato": "Merluza al horno con patata, desmigada y sin sal (revisar espinas)", "origen": "Se cocina hoy", "aparte": true } ] },
+        { "comida": "Comida", "hora": "14:00", "raciones": [
+          { "quien": "Marta", "plato": "Merluza al horno con patata", "origen": "Se cocina hoy" },
+          { "quien": "Javi", "plato": "Merluza al horno con patata", "origen": "Se cocina hoy (teletrabaja)" }
+        ] }
+      ],
+      "sesiones": [
+        { "cocinero": "Rosa", "inicio": "10:30", "fin": "12:30", "pasos": [
+          { "hora": "10:30", "paso": "Encender el horno; cortar las patatas finas", "recurso": "horno", "manos": true },
+          { "hora": "10:45", "paso": "Hornear las patatas", "recurso": "horno", "manos": false },
+          { "hora": "11:15", "paso": "Añadir la merluza sobre las patatas", "recurso": "horno", "manos": true },
+          { "hora": "11:35", "paso": "Sacar; apartar y desmigar la ración de Pablo antes de la sal", "recurso": "manos", "manos": true },
+          { "hora": "12:00", "paso": "Recoger", "recurso": "manos", "manos": true }
+        ] }
+      ],
+      "guardar": ["Nada: se come todo hoy"],
+      "manana": [],
+      "plan_b": "Si la merluza no está descongelada: tortilla de patata, 20 min",
+      "ideas": []
+    },
+    { "fecha": "2026-11-21", "libre": "Fin de semana fuera del plan. Pablo: lo que coman los demás, con su textura y sin sal." },
+    { "fecha": "2026-11-22", "libre": "Fin de semana fuera del plan. Es el día de planificación: «Plan de la semana», 20 minutos." }
+  ],
+  "recetas": [
+    { "nombre": "Lentejas con verduras", "tipo": "plato", "manos_min": 30, "total_min": 90, "maquina": "fuego", "raciones": 6, "estado": "probada", "tiempos": "comprobados", "en_semana": true,
+      "ingredientes": ["(Datos de ejemplo. Aquí van los ingredientes con cantidades para las raciones del plan)"],
+      "pasos": ["(Aquí van los pasos numerados, con sus tiempos)"],
+      "adaptaciones": ["Pablo: apartar antes de la sal y chafar"], "conservacion": "Nevera 3 días · se congela" },
+    { "nombre": "Pollo al horno con boniato", "tipo": "plato", "manos_min": 25, "total_min": 105, "maquina": "horno", "raciones": 4, "estado": "por probar", "tiempos": "estimados", "en_semana": true,
+      "ingredientes": ["(Datos de ejemplo)"], "pasos": ["(Datos de ejemplo)"],
+      "adaptaciones": ["Pablo: trozos blandos, sin sal"], "conservacion": "Nevera 3 días · se congela" },
+    { "nombre": "Merluza al horno con patata", "tipo": "plato", "manos_min": 20, "total_min": 70, "maquina": "horno", "raciones": 3, "estado": "probada", "tiempos": "comprobados", "en_semana": true,
+      "ingredientes": ["(Datos de ejemplo)"], "pasos": ["(Datos de ejemplo)"],
+      "adaptaciones": ["Pablo: desmigada, sin espinas, sin sal"], "conservacion": "Mejor del día" },
+    { "nombre": "Albóndigas en salsa", "tipo": "plato", "manos_min": 40, "total_min": 80, "maquina": "fuego", "raciones": 6, "estado": "probada", "tiempos": "comprobados", "en_semana": false,
+      "ingredientes": ["(Datos de ejemplo)"], "pasos": ["(Datos de ejemplo)"], "adaptaciones": [], "conservacion": "Nevera 3 días · se congela" }
+  ],
+  "compra": {
+    "id": "compra-2026-11-14",
+    "titulo": "Compra para la semana del 16 al 22",
+    "fecha": "2026-11-14",
+    "tienda": "Súper del barrio",
+    "revisar_en_casa": [ { "nombre": "Arroz", "nota": "¿Queda medio paquete? Si no, 1 kg" }, { "nombre": "Comino", "nota": "Para el hummus" } ],
+    "pasillos": [
+      { "nombre": "Fruta y verdura", "articulos": [
+        { "id": "a1", "nombre": "Boniato", "cantidad": "1 kg", "para": "Pollo al horno (miércoles)" },
+        { "id": "a2", "nombre": "Judías verdes", "cantidad": "1 bolsa de 500 g", "para": "Pollo al horno (miércoles)" },
+        { "id": "a3", "nombre": "Zanahoria", "cantidad": "1 bolsa de 1 kg", "para": "Lentejas (lunes) y hummus" },
+        { "id": "a4", "nombre": "Plátanos", "cantidad": "1 kg", "para": "Fijo" }
+      ] },
+      { "nombre": "Panadería", "articulos": [
+        { "id": "b1", "nombre": "Pan de molde", "cantidad": "1 paquete", "para": "Fijo", "etiqueta": true }
+      ] },
+      { "nombre": "Carne y pescado", "articulos": [
+        { "id": "c1", "nombre": "Muslos de pollo", "cantidad": "1 bandeja de 1 kg", "para": "Pollo al horno (miércoles); va al congelador hasta el martes" }
+      ] },
+      { "nombre": "Lácteos y huevos", "articulos": [
+        { "id": "d1", "nombre": "Huevos", "cantidad": "1 docena", "para": "Plan B e ideas de cena" },
+        { "id": "d2", "nombre": "Yogures naturales", "cantidad": "8", "para": "Fijo" }
+      ] },
+      { "nombre": "Despensa", "articulos": [
+        { "id": "e1", "nombre": "Lentejas pardinas", "cantidad": "1 paquete de 1 kg", "para": "Lentejas (lunes)" }
+      ] }
+    ]
+  },
+  "historico": [
+    { "semana": "Semana del 9 al 15 de noviembre", "planificado": "Garbanzos con espinacas · Albóndigas en salsa · Salmón al horno", "hecho": "Todo menos el salmón (se comió fuera el jueves)", "nota": "Sobraron 2 raciones de albóndigas: al congelador. El salmón pasa a la semana siguiente si no caduca." }
+  ],
+  "inventario": {
+    "congelador": [ { "nombre": "Albóndigas en salsa", "cantidad": "1 ración (la de Javi del lunes, reservada)", "estado": "ok" }, { "nombre": "Merluza", "cantidad": "2 lomos", "estado": "ok" } ],
+    "nevera": [ { "nombre": "Calabacín", "cantidad": "2", "estado": "urgente" }, { "nombre": "Garbanzos cocidos (bote abierto)", "cantidad": "1 bote", "estado": "pronto" }, { "nombre": "Leche", "cantidad": "1 brick", "estado": "por confirmar" } ],
+    "despensa": [ { "nombre": "Arroz", "cantidad": "Queda poco", "estado": "por confirmar" }, { "nombre": "Aceite de oliva", "cantidad": "Hay", "estado": "ok" } ]
+  },
+  "como_funciona": {
+    "calendario": [
+      { "dia": "Domingo", "que": "Actualización y plan de la semana siguiente", "quien": "Marta, con Ratatuille", "duracion": "20 min" },
+      { "dia": "Sábado", "que": "Compra con la pestaña Compra", "quien": "Marta y Javi", "duracion": "" },
+      { "dia": "Lunes, miércoles y viernes · 10:00", "que": "Se cocina, siguiendo la pestaña Hoy", "quien": "Rosa", "duracion": "2–3 h" },
+      { "dia": "Martes y jueves", "que": "Se come de lo guardado; no se cocina", "quien": "", "duracion": "" }
+    ],
+    "papeles": [ "Marta: organiza y habla con Ratatuille", "Rosa: cocina; abre Hoy cada mañana", "Javi: compra con Marta y se lleva tupper", "Lucía y Pablo: comen" ],
+    "obligatorio": [ "Cada domingo, la actualización: qué se cocinó, qué queda, qué se acabó y qué cambia (5 min)" ],
+    "opcional": [ "Tachar en la compra", "Avisar de un cambio grande durante la semana", "Que Rosa marque «hecho» en Hoy" ],
+    "si_pasa": [
+      { "situacion": "Un día no se cocinó", "que_hacer": "Nada: se usa el plan B del día y se cuenta en la actualización" },
+      { "situacion": "Viene alguien a comer", "que_hacer": "Decir a Ratatuille: «Cambio: el miércoles somos 6»" },
+      { "situacion": "Viaje o festivo", "que_hacer": "«Cambio: del 23 al 27 no estamos»" },
+      { "situacion": "Algo no gustó", "que_hacer": "Decirlo en la actualización" },
+      { "situacion": "Se saltó la actualización", "que_hacer": "Contestar solo 2 preguntas: qué queda en el congelador y qué cambia" }
+    ],
+    "cambiar": [ "«Cambio: los viernes Javi ya no teletrabaja»", "«Quiero dos recetas nuevas por semana»", "«Añade café a la compra fija»" ],
+    "primeras_semanas": [ "Semana 1: gustos y horarios", "Semana 2: tiempos, congelador y repaso completo de casa", "Semana 3: nutrición y variedad", "Semana 4: prioridades y compra" ]
+  }
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var D;
+  try { D = JSON.parse(document.getElementById("datos").textContent); }
+  catch(e){ document.querySelector("main").innerHTML = '<p class="notice">No se han podido leer los datos del panel. Pide a Ratatuille que lo vuelva a generar.</p>'; return; }
+
+  /* ---------- Almacenamiento ----------
+     Por defecto, en este móvil (localStorage). Si la plataforma ofrece estado compartido,
+     la IA puede definir window.ratatuilleStore = { get(clave), set(clave, valor) } antes de este script. */
+  var mem = {};
+  var Store = window.ratatuilleStore || {
+    get: function(k){ try { var v = localStorage.getItem("rata:" + k); return v === null ? mem[k] : JSON.parse(v); } catch(e){ return mem[k]; } },
+    set: function(k, v){ mem[k] = v; try { localStorage.setItem("rata:" + k, JSON.stringify(v)); } catch(e){} }
+  };
+
+  /* ---------- Utilidades ---------- */
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function $(id){ return document.getElementById(id); }
+  var DIAS = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+  var MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  function parse(f){ var p = f.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function hoyISO(){ var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+  function largo(f){ var d = parse(f); return DIAS[d.getDay()] + " " + d.getDate() + " de " + MESES[d.getMonth()]; }
+  function corto(f){ var d = parse(f); return DIAS[d.getDay()].slice(0,3); }
+  function toast(t){ var el = $("toast"); el.textContent = t; el.classList.add("show"); setTimeout(function(){ el.classList.remove("show"); }, 1800); }
+  function copiar(texto){
+    function viejo(){ var ta = document.createElement("textarea"); ta.value = texto; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); toast("Copiado"); } catch(e){ toast("No se ha podido copiar"); } document.body.removeChild(ta); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(function(){ toast("Copiado"); }, viejo); else viejo();
+  }
+  function compartir(titulo, texto){
+    if (navigator.share) navigator.share({ title: titulo, text: texto }).catch(function(){}); else copiar(texto);
+  }
+  function lista(arr){ return (arr && arr.length) ? '<ul class="clean">' + arr.map(function(x){ return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : '<p class="muted small">Nada.</p>'; }
+
+  /* ---------- Cabecera ---------- */
+  $("titulo").textContent = D.casa ? D.casa : "Ratatuille";
+  $("subtitulo").textContent = (D.semana && D.semana.titulo ? D.semana.titulo + " · " : "") + "actualizado el " + (D.actualizado ? D.actualizado.replace("T", " a las ") : "—");
+  $("pie").textContent = "Ratatuille · planificador de cocina en casa. Si algo no cuadra, díselo al gestor.";
+  document.title = (D.casa ? D.casa + " · " : "") + "Ratatuille";
+
+  /* ---------- Pestañas ---------- */
+  var TABS = [["hoy","Hoy"],["semana","Semana"],["compra","Compra"],["recetas","Recetas"],["historico","Histórico"],["casa","Casa"],["como","Cómo funciona"]];
+  var tabsEl = $("tabs");
+  TABS.forEach(function(t){
+    var b = document.createElement("button"); b.className = "tab-btn"; b.type = "button"; b.role = "tab"; b.id = "btn-" + t[0];
+    b.setAttribute("aria-controls", "tab-" + t[0]); b.textContent = t[1];
+    b.addEventListener("click", function(){ mostrar(t[0]); });
+    tabsEl.appendChild(b);
+  });
+  function mostrar(id){
+    TABS.forEach(function(t){
+      var on = t[0] === id;
+      $("tab-" + t[0]).classList.toggle("active", on);
+      $("btn-" + t[0]).setAttribute("aria-selected", on ? "true" : "false");
+    });
+    Store.set("ultima-pestana", id);
+  }
+
+  /* ---------- HOY ---------- */
+  var dias = D.dias || [];
+  var hoy = hoyISO();
+  var idxHoy = dias.findIndex(function(d){ return d.fecha === hoy; });
+  var aviso = "";
+  if (idxHoy < 0 && dias.length){
+    if (hoy < dias[0].fecha){ idxHoy = 0; aviso = "Esta semana aún no ha empezado. Te enseño el primer día."; }
+    else { idxHoy = dias.length - 1; aviso = "Esta semana ya ha terminado. Pide a Ratatuille el plan de la semana nueva."; }
+  }
+  var diaSel = Math.max(0, idxHoy);
+
+  function racionesHTML(c){
+    var normales = (c.raciones || []).filter(function(r){ return !r.aparte; });
+    var aparte = (c.raciones || []).filter(function(r){ return r.aparte; });
+    var h = '<div class="meal"><h3>' + esc(c.comida) + (c.hora ? ' <span class="pill">' + esc(c.hora) + '</span>' : '') + '</h3>';
+    if (normales.length) h += '<div class="who">' + normales.map(function(r){ return '<span class="n">' + esc(r.quien) + '</span><span>' + esc(r.plato) + ' <span class="muted small">· ' + esc(r.origen) + '</span></span>'; }).join("") + '</div>';
+    aparte.forEach(function(r){ h += '<div class="row-aparte who"><span class="n">' + esc(r.quien) + '</span><span>' + esc(r.plato) + ' <span class="muted small">· ' + esc(r.origen) + '</span></span></div>'; });
+    return h + '</div>';
+  }
+
+  function hechoHTML(fecha, i){
+    var k = "hecho:" + fecha + ":" + i;
+    var v = Store.get(k) || { hecho: false, sobran: 0 };
+    return '<div class="done-box" data-k="' + esc(k) + '"><span class="muted">Opcional:</span>' +
+      '<button type="button" class="btn ' + (v.hecho ? 'primary' : '') + '" data-act="hecho">' + (v.hecho ? '✓ Hecho' : 'Marcar hecho') + '</button>' +
+      '<span>Sobraron</span><span class="stepper"><button type="button" data-act="menos" aria-label="Una menos">−</button><span>' + (v.sobran || 0) + '</span><button type="button" data-act="mas" aria-label="Una más">+</button></span></div>';
+  }
+
+  function renderHoy(){
+    var el = $("tab-hoy");
+    if (!dias.length){ el.innerHTML = '<p class="notice">Todavía no hay plan.</p>'; return; }
+    var d = dias[diaSel];
+    var h = aviso ? '<p class="notice">' + esc(aviso) + '</p>' : '';
+    h += '<div class="days" role="group" aria-label="Días de la semana">' + dias.map(function(x, i){
+      return '<button type="button" class="day-btn' + (x.fecha === hoy ? ' today' : '') + '" aria-pressed="' + (i === diaSel) + '" data-i="' + i + '">' + esc(corto(x.fecha)) + '<b>' + parse(x.fecha).getDate() + '</b></button>';
+    }).join("") + '</div>';
+    h += '<h2>' + esc(largo(d.fecha).replace(/^./, function(c){ return c.toUpperCase(); })) + (d.fecha === hoy ? ' <span class="pill ok">hoy</span>' : '') + '</h2>';
+    if (d.libre){ el.innerHTML = h + '<div class="card">' + esc(d.libre) + '</div>'; enlazarDias(); return; }
+    if (d.ayer_listo && d.ayer_listo.length) h += '<div class="card"><h3>Lo que quedó listo ayer</h3>' + lista(d.ayer_listo) + '</div>';
+    h += '<div class="card"><h3>Qué se come hoy</h3>' + (d.comidas || []).map(racionesHTML).join("") + '</div>';
+    if (d.sesiones && d.sesiones.length){
+      d.sesiones.forEach(function(s, i){
+        h += '<div class="card"><h3>Qué se cocina hoy · ' + esc(s.cocinero) + ' <span class="pill">' + esc(s.inicio) + '–' + esc(s.fin) + '</span></h3><ol class="timeline">' +
+          (s.pasos || []).map(function(p){ return '<li><span class="h">' + esc(p.hora) + '</span><span>' + esc(p.paso) + '<br><span class="r">' + (p.recurso === "manos" ? "manos ocupadas" : esc(p.recurso) + (p.manos ? ' · manos ocupadas' : ' · trabaja sola')) + '</span></span></li>'; }).join("") +
+          '</ol>' + hechoHTML(d.fecha, i) + '</div>';
+      });
+    } else {
+      h += '<div class="card"><h3>Qué se cocina hoy</h3><p class="muted">Hoy no se cocina: se come de lo guardado.</p></div>';
+    }
+    if (d.guardar && d.guardar.length) h += '<div class="card"><h3>Al terminar, qué guardar</h3>' + lista(d.guardar) + '</div>';
+    if (d.manana && d.manana.length) h += '<div class="card"><h3>Dejar preparado para mañana</h3>' + lista(d.manana) + '</div>';
+    if (d.plan_b) h += '<div class="card"><h3>Plan B</h3><p>' + esc(d.plan_b) + '</p></div>';
+    if (d.ideas && d.ideas.length) h += '<div class="card"><h3>Ideas</h3>' + lista(d.ideas) + '</div>';
+    h += '<div class="btns"><button type="button" class="btn" id="copiar-dia">Copiar resumen del día</button></div>';
+    el.innerHTML = h;
+    enlazarDias();
+    el.querySelectorAll(".done-box").forEach(function(box){
+      box.addEventListener("click", function(ev){
+        var act = ev.target.getAttribute("data-act"); if (!act) return;
+        var k = box.getAttribute("data-k"); var v = Store.get(k) || { hecho: false, sobran: 0 };
+        if (act === "hecho") v.hecho = !v.hecho;
+        if (act === "mas") v.sobran = (v.sobran || 0) + 1;
+        if (act === "menos") v.sobran = Math.max(0, (v.sobran || 0) - 1);
+        Store.set(k, v); renderHoy();
+      });
+    });
+    $("copiar-dia").addEventListener("click", function(){
+      var t = largo(d.fecha) + ":\n";
+      (d.sesiones || []).forEach(function(s, i){ var v = Store.get("hecho:" + d.fecha + ":" + i) || {}; t += "- Cocina de " + s.cocinero + ": " + (v.hecho ? "hecho" : "sin marcar") + (v.sobran ? ", sobraron " + v.sobran : "") + "\n"; });
+      if (!(d.sesiones || []).length) t += "- Hoy no se cocinaba\n";
+      copiar(t);
+    });
+  }
+  function enlazarDias(){
+    $("tab-hoy").querySelectorAll(".day-btn").forEach(function(b){ b.addEventListener("click", function(){ diaSel = +b.getAttribute("data-i"); renderHoy(); }); });
+  }
+
+  /* ---------- SEMANA ---------- */
+  function renderSemana(){
+    var h = '<h2>' + esc(D.semana ? D.semana.titulo : "Semana") + '</h2><div class="week">';
+    dias.forEach(function(d){
+      h += '<div class="card"><h3>' + esc(largo(d.fecha)) + (d.fecha === hoy ? ' <span class="pill ok">hoy</span>' : '') + '</h3>';
+      if (d.libre){ h += '<p class="muted">' + esc(d.libre) + '</p></div>'; return; }
+      (d.comidas || []).forEach(function(c){ h += racionesHTML(c); });
+      if (d.sesiones && d.sesiones.length) h += '<p class="small"><span class="pill info">cocina</span> ' + d.sesiones.map(function(s){ return esc(s.cocinero) + ', ' + esc(s.inicio) + '–' + esc(s.fin); }).join(" · ") + '</p>';
+      else h += '<p class="small muted">No se cocina.</p>';
+      if (d.ideas && d.ideas.length) h += '<p class="small"><span class="pill">ideas</span> ' + d.ideas.map(esc).join(" · ") + '</p>';
+      h += '</div>';
+    });
+    $("tab-semana").innerHTML = h + '</div>';
+  }
+
+  /* ---------- COMPRA ---------- */
+  var C = D.compra || { pasillos: [] };
+  function estadoArt(id){ return Store.get("compra:" + C.id + ":" + id) || ""; }
+  function textoLista(soloPendiente){
+    var t = (C.titulo || "Lista de la compra") + (C.fecha ? " · " + C.fecha : "") + (C.tienda ? " · " + C.tienda : "") + "\n";
+    if (C.revisar_en_casa && C.revisar_en_casa.length) t += "\nMIRA EN CASA ANTES DE SALIR\n" + C.revisar_en_casa.map(function(a){ return "- " + a.nombre + (a.nota ? " (" + a.nota + ")" : ""); }).join("\n") + "\n";
+    (C.pasillos || []).forEach(function(p){
+      var arts = p.articulos.filter(function(a){ return !soloPendiente || !estadoArt(a.id); });
+      if (!arts.length) return;
+      t += "\n" + p.nombre.toUpperCase() + "\n" + arts.map(function(a){ return "- " + a.nombre + " — " + a.cantidad + (a.etiqueta ? " (revisar etiqueta)" : ""); }).join("\n") + "\n";
+    });
+    return t;
+  }
+  function renderCompra(){
+    var total = 0, hechos = 0;
+    (C.pasillos || []).forEach(function(p){ p.articulos.forEach(function(a){ total++; if (estadoArt(a.id)) hechos++; }); });
+    var h = '<h2>' + esc(C.titulo || "Lista de la compra") + '</h2><p class="muted small">' + esc([C.fecha ? "Para comprar el " + largo(C.fecha) : "", C.tienda].filter(Boolean).join(" · ")) + ' · ' + hechos + ' de ' + total + ' en el carro</p>';
+    h += '<div class="btns"><button type="button" class="btn primary" data-c="todo">Copiar lista</button><button type="button" class="btn" data-c="pend">Copiar lo que falta</button><button type="button" class="btn" data-c="share">Compartir</button></div>';
+    if (C.revisar_en_casa && C.revisar_en_casa.length){
+      h += '<div class="card" style="border-color:var(--warn)"><h3>👀 Mira en casa antes de salir</h3>' + lista(C.revisar_en_casa.map(function(a){ return a.nombre + (a.nota ? " — " + a.nota : ""); })) + '</div>';
+    }
+    (C.pasillos || []).forEach(function(p){
+      var arts = p.articulos.slice().sort(function(a, b){ return (estadoArt(a.id) ? 1 : 0) - (estadoArt(b.id) ? 1 : 0); });
+      var pend = arts.filter(function(a){ return !estadoArt(a.id); }).length;
+      h += '<div class="card aisle"><h3><span>' + esc(p.nombre) + '</span><span class="muted small">' + pend + ' pendiente' + (pend === 1 ? '' : 's') + '</span></h3>';
+      arts.forEach(function(a){
+        var st = estadoArt(a.id);
+        h += '<div class="item ' + (st === "cogido" ? "got" : st === "tengo" ? "have" : "") + '"><input type="checkbox" id="art-' + esc(a.id) + '" data-id="' + esc(a.id) + '"' + (st ? " checked" : "") + '>' +
+          '<label class="t" for="art-' + esc(a.id) + '"><span class="q">' + esc(a.nombre) + '</span> — ' + esc(a.cantidad) +
+          (a.etiqueta ? ' <span class="pill warn">revisar etiqueta</span>' : '') + (st === "tengo" ? ' <span class="pill info">ya lo tenía</span>' : '') +
+          '<br><span class="muted small">' + esc(a.para) + '</span></label>' +
+          (st ? '' : '<button type="button" class="have-btn" data-tengo="' + esc(a.id) + '">Ya lo tengo</button>') + '</div>';
+      });
+      h += '</div>';
+    });
+    h += '<p class="muted small">Lo tachado se guarda ' + (window.ratatuilleStore ? 'para todos los que abren este panel' : 'en este móvil') + '. «Ya lo tengo» avisa a Ratatuille, en la próxima actualización, de que en casa había más de lo que creía.</p>';
+    var el = $("tab-compra"); el.innerHTML = h;
+    el.querySelectorAll('input[type="checkbox"]').forEach(function(cb){
+      cb.addEventListener("change", function(){ Store.set("compra:" + C.id + ":" + cb.getAttribute("data-id"), cb.checked ? "cogido" : ""); renderCompra(); });
+    });
+    el.querySelectorAll("[data-tengo]").forEach(function(b){
+      b.addEventListener("click", function(){ Store.set("compra:" + C.id + ":" + b.getAttribute("data-tengo"), "tengo"); renderCompra(); });
+    });
+    el.querySelectorAll("[data-c]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var c = b.getAttribute("data-c");
+        if (c === "todo") copiar(textoLista(false));
+        if (c === "pend") copiar(textoLista(true));
+        if (c === "share") compartir(C.titulo || "Lista de la compra", textoLista(true));
+      });
+    });
+  }
+
+  /* ---------- RECETAS ---------- */
+  function fichaHTML(r){
+    var meta = [r.tipo, r.manos_min ? r.manos_min + " min de manos" : "", r.total_min ? r.total_min + " min en total" : "", r.maquina, r.raciones ? r.raciones + " raciones" : ""].filter(Boolean).join(" · ");
+    var est = r.estado === "probada" ? "ok" : r.estado === "descartada" ? "bad" : "warn";
+    return '<details class="card recipe"><summary>' + esc(r.nombre) + ' <span class="pill ' + est + '">' + esc(r.estado || "") + '</span>' + (r.tiempos === "estimados" ? ' <span class="pill">tiempos estimados</span>' : '') + '</summary>' +
+      '<p class="muted small">' + esc(meta) + '</p><h3>Ingredientes</h3>' + lista(r.ingredientes) + '<h3 style="margin-top:12px">Pasos</h3>' +
+      ((r.pasos && r.pasos.length) ? '<ol>' + r.pasos.map(function(p){ return "<li>" + esc(p) + "</li>"; }).join("") + '</ol>' : '<p class="muted small">Nada.</p>') +
+      ((r.adaptaciones && r.adaptaciones.length) ? '<h3>Adaptaciones</h3>' + lista(r.adaptaciones) : '') +
+      (r.conservacion ? '<p class="small"><b>Conservación:</b> ' + esc(r.conservacion) + '</p>' : '') + '</details>';
+  }
+  function renderRecetas(filtro){
+    var rs = D.recetas || [];
+    var f = (filtro || "").toLowerCase();
+    var semana = rs.filter(function(r){ return r.en_semana; });
+    var resto = rs.filter(function(r){ return !r.en_semana && (!f || (r.nombre + " " + (r.tipo || "") + " " + (r.maquina || "")).toLowerCase().indexOf(f) >= 0); });
+    var h = '<h2>Recetas de esta semana</h2>' + (semana.length ? semana.map(fichaHTML).join("") : '<p class="muted">Ninguna.</p>');
+    h += '<h2>Recetario de la casa</h2><input class="search" id="buscar" type="search" placeholder="Buscar por nombre, tipo o máquina" value="' + esc(filtro || "") + '">';
+    h += resto.length ? resto.map(fichaHTML).join("") : '<p class="muted">No hay más recetas' + (f ? ' con «' + esc(filtro) + '»' : '') + '.</p>';
+    $("tab-recetas").innerHTML = h;
+    var b = $("buscar"); b.addEventListener("input", function(){ var pos = b.selectionStart; renderRecetas(b.value); var nb = $("buscar"); nb.focus(); try { nb.setSelectionRange(pos, pos); } catch(e){} });
+  }
+
+  /* ---------- HISTÓRICO ---------- */
+  function renderHistorico(){
+    var hs = D.historico || [];
+    $("tab-historico").innerHTML = '<h2>Semanas anteriores</h2>' + (hs.length ? hs.map(function(s){
+      return '<div class="card"><h3>' + esc(s.semana) + '</h3><p><b>Plan:</b> ' + esc(s.planificado) + '</p><p><b>Lo que se hizo:</b> ' + esc(s.hecho) + '</p>' + (s.nota ? '<p class="muted">' + esc(s.nota) + '</p>' : '') + '</div>';
+    }).join("") : '<p class="muted">Todavía no hay semanas cerradas.</p>');
+  }
+
+  /* ---------- CASA ---------- */
+  function renderCasa(){
+    var inv = D.inventario || {};
+    var etiqueta = { urgente: '<span class="inv-urgente">gastar ya</span>', pronto: '<span class="inv-pronto">pronto</span>', "por confirmar": '<span class="pill">por confirmar</span>', ok: '' };
+    var h = '<h2>Qué hay en casa</h2><p class="muted small">Solo para consultar. Lo mantiene Ratatuille con la actualización semanal.</p>';
+    [["congelador","❄️ Congelador"],["nevera","🧊 Nevera"],["despensa","🥫 Despensa"]].forEach(function(z){
+      var arr = inv[z[0]] || [];
+      h += '<div class="card"><h3>' + z[1] + '</h3>' + (arr.length ? '<table><thead><tr><th>Qué</th><th>Cuánto</th><th></th></tr></thead><tbody>' + arr.map(function(a){ return '<tr><td>' + esc(a.nombre) + '</td><td>' + esc(a.cantidad) + '</td><td>' + (etiqueta[a.estado] || "") + '</td></tr>'; }).join("") + '</tbody></table>' : '<p class="muted small">Vacío.</p>') + '</div>';
+    });
+    $("tab-casa").innerHTML = h;
+  }
+
+  /* ---------- CÓMO FUNCIONA ---------- */
+  function renderComo(){
+    var c = D.como_funciona || {};
+    var h = '<h2>Vuestra semana</h2><div class="card"><table><tbody>' + (c.calendario || []).map(function(x){
+      return '<tr><td><b>' + esc(x.dia) + '</b></td><td>' + esc(x.que) + (x.quien ? '<br><span class="muted small">' + esc(x.quien) + '</span>' : '') + '</td><td class="muted small">' + esc(x.duracion || "") + '</td></tr>';
+    }).join("") + '</tbody></table></div>';
+    h += '<h2>Quién hace qué</h2><div class="card">' + lista(c.papeles) + '</div>';
+    h += '<h2>Lo que hay que hacer</h2><div class="card"><h3>Obligatorio</h3>' + lista(c.obligatorio) + '<h3 style="margin-top:12px">Opcional</h3>' + lista(c.opcional) + '</div>';
+    h += '<h2>Qué hacer si…</h2><div class="card"><table><tbody>' + (c.si_pasa || []).map(function(x){ return '<tr><td><b>' + esc(x.situacion) + '</b></td><td>' + esc(x.que_hacer) + '</td></tr>'; }).join("") + '</tbody></table></div>';
+    h += '<h2>Para cambiar algo</h2><div class="card"><p>Díselo a Ratatuille con tus palabras. Por ejemplo:</p>' + lista(c.cambiar) + '</div>';
+    if (c.primeras_semanas && c.primeras_semanas.length) h += '<h2>Las primeras semanas</h2><div class="card"><p class="muted small">El sistema se afina cada semana. Al final de cada plan, 2 o 3 preguntas:</p>' + lista(c.primeras_semanas) + '</div>';
+    $("tab-como").innerHTML = h;
+  }
+
+  /* ---------- Imprimir ---------- */
+  $("imprimir").addEventListener("click", function(){ window.print(); });
+
+  /* ---------- Arranque ---------- */
+  renderHoy(); renderSemana(); renderCompra(); renderRecetas(""); renderHistorico(); renderCasa(); renderComo();
+  var ultima = Store.get("ultima-pestana");
+  mostrar(TABS.some(function(t){ return t[0] === ultima; }) ? ultima : "hoy");
+})();
+</script>
+</body>
+</html>

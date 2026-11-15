@@ -1,0 +1,59 @@
+{
+  "inicio": "AAAA-MM-DD",
+  "fin": "AAAA-MM-DD",
+  "estado": "plan",
+  "comidas": [
+    {
+      "fecha": "AAAA-MM-DD",
+      "comida": "comida",
+      "hora": "14:00",
+      "raciones": [
+        { "quien": "Nombre", "plato": "Receta", "origen": "sesion:AAAA-MM-DD-1", "aparte": false, "tupper": false }
+      ]
+    }
+  ],
+  "sesiones": [
+    {
+      "id": "AAAA-MM-DD-1",
+      "fecha": "AAAA-MM-DD",
+      "cocinero": "Nombre",
+      "inicio": "17:00",
+      "fin": "19:30",
+      "elaboraciones": [
+        { "receta": "Receta", "raciones": 6, "para": ["AAAA-MM-DD comida", "AAAA-MM-DD comida"] }
+      ],
+      "linea_de_tiempo": [
+        { "hora": "17:00", "paso": "Texto del paso", "recurso": "fuego 1", "manos": true }
+      ],
+      "termina_simulacion": "19:15"
+    }
+  ],
+  "reparto": [
+    { "fecha": "AAAA-MM-DD", "momento": "vispera", "texto": "Pasar 2 raciones de … del congelador a la nevera" }
+  ],
+  "plan_b": [
+    { "fecha": "AAAA-MM-DD", "texto": "Si no queda …: … del congelador, 15 min" }
+  ],
+  "ideas": [
+    { "fecha": "AAAA-MM-DD", "comida": "cena", "texto": "Hummus con crudités (gasta el bote de garbanzos)" }
+  ],
+  "comprobador": [
+    { "regla": "C1", "resultado": "ok", "nota": "" }
+  ],
+  "compra": {
+    "id": "compra-AAAA-MM-DD",
+    "fecha": "AAAA-MM-DD",
+    "tienda": "",
+    "revisar_en_casa": [],
+    "pasillos": [
+      { "nombre": "Fruta y verdura", "articulos": [ { "nombre": "", "cantidad": "", "para": "", "etiqueta": false } ] }
+    ]
+  },
+  "cierre": {
+    "fecha_actualizacion": null,
+    "hecho": [],
+    "no_hecho": [],
+    "sobras": [],
+    "notas": ""
+  }
+}

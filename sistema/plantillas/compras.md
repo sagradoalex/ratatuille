@@ -1,0 +1,9 @@
+# Compras
+
+> Una sección por compra: la lista que se generó y lo que se compró de verdad (lo confirmado por el gestor).
+
+## AAAA-MM-DD · Tienda · semana del AAAA-MM-DD
+
+- Lista: …
+- Comprado de más: …
+- No había / no se compró: …
