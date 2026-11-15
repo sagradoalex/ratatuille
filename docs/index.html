@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía de Ratatuille</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: columna de lectura con índice fijo a la izquierda en escritorio; en móvil, índice desplegable arriba. */
+:root{
+  --bg:#f6f7f4; --surface:#ffffff; --surface-2:#eef1ec; --fg:#1b211d; --muted:#5d6760; --line:#dde2dc;
+  --accent:#2e6a4c; --accent-soft:#dcebe2; --tomato:#c2412d; --tomato-soft:#f8e1dc; --gold:#8a6400; --gold-soft:#f6ecce; --blue:#2f5c8a; --blue-soft:#e0eaf5;
+  --font-display:"Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121614; --surface:#1a1f1c; --surface-2:#222924; --fg:#e8ede9; --muted:#9aa59d; --line:#2f3832;
+    --accent:#7cc7a0; --accent-soft:#1d3329; --tomato:#ef8a76; --tomato-soft:#3a1f1a; --gold:#e3bf5a; --gold-soft:#332a12; --blue:#93badf; --blue-soft:#1b2838; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121614; --surface:#1a1f1c; --surface-2:#222924; --fg:#e8ede9; --muted:#9aa59d; --line:#2f3832;
+  --accent:#7cc7a0; --accent-soft:#1d3329; --tomato:#ef8a76; --tomato-soft:#3a1f1a; --gold:#e3bf5a; --gold-soft:#332a12; --blue:#93badf; --blue-soft:#1b2838; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--font-body);padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:32px;padding-block:28px 64px}
+@media (min-width:980px){ .wrap{grid-template-columns:230px minmax(0,1fr)} }
+aside{min-width:0}
+@media (min-width:980px){ aside nav{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 24px)} }
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.toc summary{font-family:var(--font-display);font-weight:700;cursor:pointer}
+.toc ol{margin:10px 0 0;padding-left:20px;font-size:.92rem}
+.toc a{color:var(--fg);text-decoration:none}
+.toc a:hover{color:var(--accent)}
+main{min-width:0}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;line-height:1.2}
+h1{font-size:clamp(2rem,4vw,2.8rem);margin:0 0 8px}
+h2{font-size:1.55rem;margin:56px 0 12px;padding-top:8px;border-top:2px solid var(--fg)}
+h3{font-size:1.1rem;margin:28px 0 8px}
+p{max-width:68ch}
+.lead{font-size:1.12rem;color:var(--muted);max-width:62ch}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+a{color:var(--accent)}
+code{font-family:var(--font-mono);font-size:.88em;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+.grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media (min-width:640px){ .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:900px){ .grid.four{grid-template-columns:repeat(4,minmax(0,1fr))} .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (min-width:640px) and (max-width:899px){ .grid.four,.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.box h3{margin-top:0}
+.box ul{margin:6px 0 0;padding-left:18px}
+.box li{margin:3px 0}
+.k{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:10px;display:block}
+.goals{counter-reset:g;list-style:none;padding:0;margin:16px 0;display:grid;gap:8px;grid-template-columns:1fr}
+@media (min-width:640px){ .goals{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:900px){ .goals{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.goals li{counter-increment:g;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px 10px 44px;position:relative}
+.goals li::before{content:counter(g);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font:700 .8rem/22px var(--font-display);text-align:center}
+.note{border-left:4px solid var(--gold);background:var(--gold-soft);padding:10px 14px;border-radius:0 10px 10px 0;margin:14px 0;max-width:72ch}
+.note.red{border-color:var(--tomato);background:var(--tomato-soft)}
+.note.green{border-color:var(--accent);background:var(--accent-soft)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:620px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td.id{font-family:var(--font-mono);font-size:.85rem;color:var(--muted);white-space:nowrap}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.t-block{background:var(--tomato-soft);color:var(--tomato)}
+.t-warn{background:var(--gold-soft);color:var(--gold)}
+.t-ok{background:var(--accent-soft);color:var(--accent)}
+.t-info{background:var(--blue-soft);color:var(--blue)}
+.diagram{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+.diagram svg{display:block;max-width:none}
+.steps{list-style:none;padding:0;margin:12px 0;display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border-bottom:0}
+.steps .n{font:700 1rem/1.6 var(--font-display);color:var(--accent);font-variant-numeric:tabular-nums}
+.steps b{display:block}
+.week{display:grid;gap:8px;grid-template-columns:repeat(7,minmax(118px,1fr));min-width:860px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:.85rem}
+.day h4{margin:0 0 6px;font-family:var(--font-display);font-size:.95rem}
+.ev{border-radius:6px;padding:4px 6px;margin:4px 0}
+.ev.g{background:var(--accent-soft)} .ev.t{background:var(--tomato-soft)} .ev.b{background:var(--blue-soft)} .ev.y{background:var(--gold-soft)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--muted);margin:8px 0}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.legend .g::before{background:var(--accent-soft);border:1px solid var(--accent)} .legend .t::before{background:var(--tomato-soft);border:1px solid var(--tomato)} .legend .b::before{background:var(--blue-soft);border:1px solid var(--blue)} .legend .y::before{background:var(--gold-soft);border:1px solid var(--gold)}
+pre.tree{font-family:var(--font-mono);font-size:.85rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-x:auto}
+footer{color:var(--muted);font-size:.85rem;margin-top:48px}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important} }
+html{scroll-behavior:smooth}
+/* Colores de los diagramas SVG, tomados de los tokens */
+.dg-box{fill:var(--surface-2);stroke:var(--line)}
+.dg-acc{fill:var(--accent-soft);stroke:var(--accent)}
+.dg-tom{fill:var(--tomato-soft);stroke:var(--tomato)}
+.dg-blu{fill:var(--blue-soft);stroke:var(--blue)}
+.dg-gol{fill:var(--gold-soft);stroke:var(--gold)}
+.dg-t{fill:var(--fg);font:600 13px var(--font-body)}
+.dg-s{fill:var(--muted);font:12px var(--font-body)}
+.dg-l{stroke:var(--muted);stroke-width:1.5;fill:none}
+.dg-arrow{fill:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<aside>
+  <nav class="toc" aria-label="Índice">
+    <details open>
+      <summary>Índice</summary>
+      <ol>
+        <li><a href="#objetivo">Objetivo</a></li>
+        <li><a href="#actores">Actores</a></li>
+        <li><a href="#mapa">Mapa del sistema</a></li>
+        <li><a href="#semana">Una semana real</a></li>
+        <li><a href="#flujos">Flujos</a></li>
+        <li><a href="#casos">Casos de uso</a></li>
+        <li><a href="#reglas">Reglas que lo sostienen</a></li>
+        <li><a href="#plataformas">Claude y ChatGPT</a></li>
+        <li><a href="#repo">Qué hay en el repo</a></li>
+        <li><a href="#revisar">Qué falta por probar</a></li>
+      </ol>
+    </details>
+  </nav>
+</aside>
+
+<main>
+<p class="eyebrow">Ratatuille 1.0.0 · guía para revisar · 2026-11-15</p>
+<h1>Ratatuille, planificador de cocina en casa</h1>
+<p class="lead">Una IA de pago (Claude o ChatGPT) que, cargada con unos archivos, planifica las comidas de una casa semana a semana. Esta guía explica quién lo usa, qué pasa en cada momento y qué reglas lo hacen fiable, para que puedas revisarlo antes de dárselo a nadie.</p>
+
+<!-- ============ OBJETIVO ============ -->
+<h2 id="objetivo">Objetivo</h2>
+<p>Tener planificada la semana: según <b>quién come</b>, <b>cuánto come</b> y <b>qué debe comer</b>, un plan que:</p>
+<ol class="goals">
+  <li>sea fácil de seguir</li>
+  <li>aproveche los alimentos de casa</li>
+  <li>proponga recetas saludables</li>
+  <li>se adapte a las personas y a las circunstancias</li>
+  <li>se actualice y se siga de forma sencilla</li>
+  <li>facilite la compra</li>
+</ol>
+<div class="note"><b>No hace nada más.</b> Fuera de la versión 1: presupuesto, métricas, menú del colegio, pedidos online y el servidor con cuentas de usuario (visión futura).</div>
+
+<div class="grid two">
+  <div class="box"><h3>Lo que cuesta a la familia</h3>
+    <ul>
+      <li><b>~15 min</b> de configuración (o 35, si eligen la completa)</li>
+      <li><b>~20 min a la semana</b>, todos el mismo día: 5 de actualización y 15 de plan</li>
+      <li>Nada obligatorio el resto de la semana</li>
+    </ul>
+  </div>
+  <div class="box"><h3>A quién le ahorra más</h3>
+    <ul>
+      <li>Casas con varias personas que comen distinto (niños, bebé, alergias)</li>
+      <li>Quien cocina en tandas y necesita saber qué guardar</li>
+      <li>Casas donde cocina otra persona y hay que dejárselo claro</li>
+      <li>Quien tira comida porque no sabe lo que tiene</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ ACTORES ============ -->
+<h2 id="actores">Actores</h2>
+<p>Cuatro papeles humanos y uno de la máquina. Una misma persona puede tener varios; en muchas casas, gestor y cocinero son la misma.</p>
+<div class="grid four">
+  <div class="box"><h3>Gestor</h3>
+    <span class="k">Qué hace</span>
+    <ul><li><b>Es el único que habla con la IA</b></li><li>Configura la casa</li><li>Hace la actualización semanal</li><li>Aprueba el plan</li></ul>
+    <span class="k">Qué ve</span><ul><li>Todo el panel</li></ul>
+    <span class="k">Obligatorio</span><ul><li>La actualización semanal</li></ul>
+  </div>
+  <div class="box"><h3>Cocinero</h3>
+    <span class="k">Qué hace</span>
+    <ul><li>Sigue la pestaña Hoy: horas, pasos, qué sacar y qué guardar</li><li>Si algo falla, usa el plan B</li></ul>
+    <span class="k">Qué ve</span><ul><li>Hoy y Recetas</li></ul>
+    <span class="k">Obligatorio</span><ul><li><b>Nada.</b> No informa; el botón «hecho» es opcional</li></ul>
+  </div>
+  <div class="box"><h3>Comprador</h3>
+    <span class="k">Qué hace</span>
+    <ul><li>Compra con la lista por pasillos</li><li>Tacha, copia o comparte</li><li>Marca «ya lo tengo»</li></ul>
+    <span class="k">Qué ve</span><ul><li>Compra</li></ul>
+    <span class="k">Obligatorio</span><ul><li>Nada más que comprar</li></ul>
+  </div>
+  <div class="box"><h3>Comensales</h3>
+    <span class="k">Qué hacen</span>
+    <ul><li>Comen</li><li>Si algo cambia, se lo dicen al gestor</li></ul>
+    <span class="k">Qué ven</span><ul><li>Hoy y Semana: qué se come y su tupper</li></ul>
+    <span class="k">Obligatorio</span><ul><li>Nada</li></ul>
+  </div>
+</div>
+<div class="grid two" style="margin-top:14px">
+  <div class="box"><h3>La IA (Ratatuille)</h3>
+    <p style="margin:0">Planifica, elige y adapta recetas, simula cada sesión de cocina, pasa el comprobador, genera la compra, mantiene los datos y publica el panel. Pregunta todo junto y no supone nada. <b>No tira nada ni descuenta nada sin confirmación del gestor.</b></p>
+  </div>
+  <div class="box"><h3>El panel</h3>
+    <p style="margin:0">El único sitio donde la casa consulta el sistema. Siete pestañas: Hoy, Semana, Compra, Recetas, Histórico, Casa y Cómo funciona. No calcula nada: pinta lo que la IA le da.</p>
+  </div>
+</div>
+
+<!-- ============ MAPA ============ -->
+<h2 id="mapa">Mapa del sistema</h2>
+<p>Tres piezas que no se mezclan: <b>el sistema</b> (reglas, igual para todas las casas), <b>los datos de la casa</b> (solo de esa familia) y <b>el panel</b> (lo que ve la casa). Separarlos permite actualizar el sistema sin tocar los datos.</p>
+<div class="diagram" role="img" aria-label="Mapa: el repositorio aporta el sistema a la IA; el gestor habla con la IA; la IA lee y escribe los datos de la casa y publica el panel, que miran cocinero, comprador y comensales.">
+<svg width="860" height="330" viewBox="0 0 860 330">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
+  <rect x="20" y="30" width="200" height="110" rx="10" class="dg-box"/>
+  <text x="36" y="56" class="dg-t">Repo de GitHub</text>
+  <text x="36" y="78" class="dg-s">sistema/ · reglas e instrucciones</text>
+  <text x="36" y="96" class="dg-s">onboarding · seguridad · etapas</text>
+  <text x="36" y="114" class="dg-s">plantillas · panel</text>
+  <text x="36" y="132" class="dg-s">Igual para todas las casas</text>
+
+  <rect x="20" y="190" width="200" height="100" rx="10" class="dg-gol"/>
+  <text x="36" y="216" class="dg-t">Gestor</text>
+  <text x="36" y="238" class="dg-s">«Empezamos», «Plan de la semana»,</text>
+  <text x="36" y="256" class="dg-s">«Cambio: …», actualización</text>
+  <text x="36" y="274" class="dg-s">El único que habla con la IA</text>
+
+  <rect x="320" y="100" width="210" height="120" rx="12" class="dg-acc"/>
+  <text x="338" y="128" class="dg-t">IA del gestor</text>
+  <text x="338" y="150" class="dg-s">Claude o ChatGPT, de pago</text>
+  <text x="338" y="170" class="dg-s">Planifica · simula · comprueba</text>
+  <text x="338" y="190" class="dg-s">Genera compra · publica panel</text>
+
+  <rect x="620" y="20" width="220" height="110" rx="10" class="dg-blu"/>
+  <text x="636" y="46" class="dg-t">Datos de la casa</text>
+  <text x="636" y="68" class="dg-s">mi-casa/ (con carpeta) o</text>
+  <text x="636" y="86" class="dg-s">estado · recetario · histórico (chat)</text>
+  <text x="636" y="104" class="dg-s">Nunca vuelven al repo</text>
+
+  <rect x="620" y="190" width="220" height="120" rx="10" class="dg-tom"/>
+  <text x="636" y="216" class="dg-t">Panel</text>
+  <text x="636" y="238" class="dg-s">Claude: enlace compartido</text>
+  <text x="636" y="256" class="dg-s">ChatGPT: archivo por WhatsApp</text>
+  <text x="636" y="280" class="dg-s">Cocinero · comprador · comensales</text>
+
+  <path d="M220 85 C270 85 280 130 318 140" class="dg-l" marker-end="url(#ar)"/>
+  <text x="240" y="78" class="dg-s">se carga</text>
+  <path d="M220 240 C270 240 280 200 318 190" class="dg-l" marker-end="url(#ar)"/>
+  <path d="M318 205 C280 215 270 255 222 255" class="dg-l" marker-end="url(#ar)"/>
+  <text x="236" y="296" class="dg-s">conversa</text>
+  <path d="M530 140 C570 140 580 90 618 80" class="dg-l" marker-end="url(#ar)"/>
+  <path d="M618 100 C585 110 575 150 532 155" class="dg-l" marker-end="url(#ar)"/>
+  <text x="560" y="72" class="dg-s">lee / escribe</text>
+  <path d="M530 185 C570 190 580 240 618 245" class="dg-l" marker-end="url(#ar)"/>
+  <text x="558" y="268" class="dg-s">publica</text>
+</svg>
+</div>
+
+<!-- ============ SEMANA ============ -->
+<h2 id="semana">Una semana real</h2>
+<p>La casa de ejemplo del panel: Marta organiza, Rosa cocina de lunes a viernes de 10:00 a 13:00, Javi se lleva tupper, Lucía come en el comedor y Pablo (11 meses) come aparte y sin sal. Planifican el domingo y compran el sábado.</p>
+<div class="legend"><span class="y">Gestor</span><span class="g">Cocina (sesión con hora)</span><span class="b">Se come de lo guardado</span><span class="t">Compra</span></div>
+<div class="diagram">
+<div class="week">
+  <div class="day"><h4>Lunes</h4><div class="ev g">10:00–12:45 · Rosa · lentejas (6 raciones)</div><div class="ev b">Javi: tupper del congelador</div><div class="small">Pablo 12:30, aparte</div></div>
+  <div class="day"><h4>Martes</h4><div class="ev b">Lentejas del lunes</div><div class="small">No se cocina · plan B listo</div><div class="ev b">Noche: pollo a la nevera</div></div>
+  <div class="day"><h4>Miércoles</h4><div class="ev g">10:30–12:45 · Rosa · pollo al horno + judías</div><div class="ev b">Javi: lentejas del lunes</div></div>
+  <div class="day"><h4>Jueves</h4><div class="ev b">Pollo del miércoles</div><div class="ev b">Noche: merluza a la nevera</div></div>
+  <div class="day"><h4>Viernes</h4><div class="ev g">10:30–12:30 · Rosa · merluza con patata</div><div class="small">Javi teletrabaja</div></div>
+  <div class="day"><h4>Sábado</h4><div class="ev t">Compra con la pestaña Compra</div><div class="small">Fuera del plan</div></div>
+  <div class="day"><h4>Domingo</h4><div class="ev y">Marta: actualización (5 min) + plan de la semana siguiente (15 min)</div></div>
+</div>
+</div>
+<p>Cada cosa que se cocina tiene <b>día, cocinero y hora</b>. Los días sin cocina se come de lo guardado y hay un <b>plan B de 15 minutos</b> por si lo guardado ya no está. La víspera de cada comida del congelador, el panel dice qué pasar a la nevera.</p>
+
+<!-- ============ FLUJOS ============ -->
+<h2 id="flujos">Flujos</h2>
+
+<h3>F1 · Instalación (una vez)</h3>
+<ol class="steps">
+  <li><span class="n">1</span><span><b>Descargar el ZIP</b> del repo y descomprimirlo.</span></li>
+  <li><span class="n">2</span><span><b>Crear un proyecto</b> en Claude o ChatGPT y pegar <code>sistema/ARRANQUE.md</code> en sus instrucciones.</span></li>
+  <li><span class="n">3</span><span><b>Subir</b> los archivos de <code>sistema/</code> y <code>sistema/plantillas/</code>. Con una IA que trabaja con carpetas (Claude Code), basta con abrirla en la carpeta.</span></li>
+  <li><span class="n">4</span><span>Escribir <b>«Empezamos»</b>. La IA ve que no hay datos de la casa y arranca el onboarding.</span></li>
+</ol>
+
+<h3>F2 · Onboarding (una vez)</h3>
+<div class="diagram" role="img" aria-label="Onboarding: presentación, elección de camino entre rápido paso a paso, rápido de golpe y completo; los tres acaban en el cierre, que guarda datos, diseña la primera semana, publica el panel y explica el flujo.">
+<svg width="860" height="250" viewBox="0 0 860 250">
+  <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
+  <rect x="10" y="95" width="140" height="60" rx="10" class="dg-box"/><text x="24" y="120" class="dg-t">Presentación</text><text x="24" y="140" class="dg-s">qué es · expectativas</text>
+  <rect x="200" y="15" width="220" height="62" rx="10" class="dg-acc"/><text x="214" y="40" class="dg-t">Rápido, paso a paso</text><text x="214" y="60" class="dg-s">9 preguntas en 5 pasos · ~15 min</text>
+  <rect x="200" y="95" width="220" height="62" rx="10" class="dg-acc"/><text x="214" y="120" class="dg-t">Rápido, de golpe</text><text x="214" y="140" class="dg-s">audio de 3 min con guion</text>
+  <rect x="200" y="175" width="220" height="62" rx="10" class="dg-gol"/><text x="214" y="200" class="dg-t">Completo</text><text x="214" y="220" class="dg-s">10 partes del catálogo · ~35 min</text>
+  <rect x="470" y="55" width="150" height="62" rx="10" class="dg-box"/><text x="484" y="80" class="dg-t">Valores por defecto</text><text x="484" y="100" class="dg-s">dichos en voz alta</text>
+  <rect x="660" y="80" width="190" height="100" rx="10" class="dg-tom"/><text x="674" y="104" class="dg-t">Cierre</text><text x="674" y="124" class="dg-s">guarda los datos</text><text x="674" y="141" class="dg-s">1.ª semana + comprobador</text><text x="674" y="158" class="dg-s">publica el panel</text><text x="674" y="175" class="dg-s">explica el flujo</text>
+  <path d="M150 115 C175 100 180 50 198 46" class="dg-l" marker-end="url(#ar2)"/>
+  <path d="M150 125 L198 126" class="dg-l" marker-end="url(#ar2)"/>
+  <path d="M150 135 C175 150 180 200 198 206" class="dg-l" marker-end="url(#ar2)"/>
+  <path d="M420 46 C445 50 450 80 468 84" class="dg-l" marker-end="url(#ar2)"/>
+  <path d="M420 126 C445 120 450 100 468 96" class="dg-l" marker-end="url(#ar2)"/>
+  <path d="M620 86 L658 110" class="dg-l" marker-end="url(#ar2)"/>
+  <path d="M420 206 C520 206 600 180 658 160" class="dg-l" marker-end="url(#ar2)"/>
+</svg>
+</div>
+<p>Las 9 preguntas del camino rápido: quiénes sois y las fechas de nacimiento de los menores · alergias y bebés · qué comidas y qué días · quién come fuera o lleva tupper · quién cocina y qué días · desde qué hora y hasta cuándo · qué máquinas · cuándo y dónde se compra · repaso exprés de congelador y nevera.</p>
+<div class="note green"><b>La seguridad nunca se aplaza:</b> alergias, dietas obligatorias y bebés se preguntan siempre al principio, en cualquier camino. Lo demás arranca con valores por defecto y se afina con como mucho 3 preguntas al cerrar cada una de las 4 primeras semanas.</div>
+
+<h3>F3 · Ciclo semanal</h3>
+<ol class="steps">
+  <li><span class="n">1</span><span><b>Actualización</b> · gestor, día de planificación, 5 min, <span class="tag t-block">obligatoria</span>. Cuatro preguntas; la IA enseña lo que cree que pasó y el gestor solo corrige.</span></li>
+  <li><span class="n">2</span><span><b>Plan de la semana siguiente</b> · IA. Siempre la semana siguiente, salvo que se diga otra cosa. Lo que queda de la semana en curso, reservado.</span></li>
+  <li><span class="n">3</span><span><b>Comprobador</b> · IA. 14 reglas; el resultado se enseña debajo del plan. El gestor aprueba o pide cambios (15 min con el paso 2).</span></li>
+  <li><span class="n">4</span><span><b>Panel publicado y compra</b> · comprador. Lista por pasillos, con «Mira en casa antes de salir» arriba.</span></li>
+  <li><span class="n">5</span><span><b>Cocinar</b> · cocinero, siguiendo Hoy. No informa de nada.</span></li>
+  <li><span class="n">6</span><span><b>Avisos sueltos</b> · gestor, <span class="tag t-ok">opcional</span>. «Cambio: …»; la IA ajusta, vuelve a pasar el comprobador y republica.</span></li>
+</ol>
+
+<h3>F4 · La actualización semanal</h3>
+<div class="tbl"><table>
+<thead><tr><th>#</th><th>Pregunta</th><th>Cómo la presenta la IA</th><th>Ejemplo de respuesta</th></tr></thead>
+<tbody>
+<tr><td class="id">1</td><td>¿Qué se cocinó y qué no?</td><td>Los platos del plan, con ✓ por defecto</td><td>«Todo menos el pescado del jueves»</td></tr>
+<tr><td class="id">2</td><td>¿Qué queda cocinado?</td><td>Las raciones que deberían quedar</td><td>«Quedan 3 de lentejas, no 4»</td></tr>
+<tr><td class="id">3</td><td>¿Qué se acabó, sobra o hay que gastar ya? ¿Cambió algo de la compra?</td><td>Más los básicos que se estarían acabando</td><td>«Se acabaron los huevos. Compré pollo de más»</td></tr>
+<tr><td class="id">4</td><td>¿Qué cambia la semana que viene?</td><td>—</td><td>«El miércoles viene la abuela»</td></tr>
+</tbody></table></div>
+<p>Si se salta una semana, la IA solo pregunta dos cosas (qué queda en el congelador y qué cambia) y marca el resto <i>por confirmar</i>. En modo chat, al terminar dice qué archivo sustituir en el proyecto.</p>
+
+<h3>F5 · Cómo se diseña un plan</h3>
+<ol class="steps">
+  <li><span class="n">1</span><span><b>Etapas</b> de cada persona por su edad. Si alguien cambia de etapa, lo avisa antes.</span></li>
+  <li><span class="n">2</span><span><b>Quién come</b> cada comida de cada día, y dónde.</span></li>
+  <li><span class="n">3</span><span><b>Raciones</b> con el factor de cada etapa y el ajuste de cada persona.</span></li>
+  <li><span class="n">4</span><span><b>Lo que hay que gastar</b>: lo que caduca y lo del congelador, primero.</span></li>
+  <li><span class="n">5</span><span><b>Recetas</b>: recetario de la casa → internet → creada por la IA. Siempre hay solución.</span></li>
+  <li><span class="n">6</span><span><b>Sesiones</b>: cada elaboración a un hueco con día, cocinero y horas, y <b>simulación</b> de cada sesión.</span></li>
+  <li><span class="n">7</span><span><b>Reparto y plan B</b>: víspera, antes de cocinar, al servir, al terminar.</span></li>
+  <li><span class="n">8</span><span><b>Ideas</b> para las comidas que no se planifican.</span></li>
+  <li><span class="n">9</span><span><b>Desayunos y meriendas</b> como rotación, si entran.</span></li>
+  <li><span class="n">10</span><span><b>Comprobador</b> C1–C14.</span></li>
+  <li><span class="n">11</span><span><b>Compra</b>: plan − lo que hay sin reservar + fijos, en formato de venta y por pasillos.</span></li>
+  <li><span class="n">12</span><span><b>Panel</b>, y C14: que diga lo mismo que el plan.</span></li>
+</ol>
+
+<h3>F6 · Un día de cocina (cocinero)</h3>
+<p>Abre el panel: se abre en <b>Hoy</b>. Lee en orden: qué quedó listo ayer → qué se come hoy, cada persona en su línea → <b>línea de tiempo con horas</b> (qué hacen las manos y qué hace cada máquina) → qué guardar al terminar → qué dejar para mañana → plan B. Si quiere, pulsa «hecho» y cuántas raciones sobraron; nadie depende de ello.</p>
+
+<h3>F7 · La compra (comprador)</h3>
+<p>Pestaña <b>Compra</b>: primero «Mira en casa antes de salir»; después, los pasillos en orden de recorrido. Cada artículo dice cantidad en formato de venta y para qué es. Se tacha (lo tachado baja al final de su pasillo), se marca «ya lo tengo» o se copia la lista entera o solo lo que falta para WhatsApp.</p>
+
+<h3>F8 · Actualizar a una versión nueva</h3>
+<p>Se sustituye <code>sistema/</code> (y <code>LEEME.md</code>, <code>VERSION</code> y <code>CAMBIOS.md</code>). Los datos de la casa no se tocan. En la conversación siguiente, la IA compara versiones y explica en dos líneas qué cambia.</p>
+
+<!-- ============ CASOS DE USO ============ -->
+<h2 id="casos">Casos de uso</h2>
+<div class="tbl"><table>
+<thead><tr><th>ID</th><th>Caso</th><th>Actor</th><th>Cómo empieza</th><th>Qué hace el sistema</th><th>Resultado</th></tr></thead>
+<tbody>
+<tr><td class="id">CU-01</td><td>Configurar la casa</td><td>Gestor</td><td>«Empezamos»</td><td>Presentación, elige camino, preguntas con porqué y ejemplo</td><td>Datos guardados, 1.ª semana, panel, flujo explicado</td></tr>
+<tr><td class="id">CU-02</td><td>Planificar la semana</td><td>Gestor</td><td>«Plan de la semana»</td><td>Actualización → diseño → comprobador → compra → panel</td><td>Plan aprobado y panel republicado</td></tr>
+<tr><td class="id">CU-03</td><td>Hacer solo la actualización</td><td>Gestor</td><td>«Actualización»</td><td>4 preguntas; descuenta lo confirmado</td><td>Inventario e histórico al día</td></tr>
+<tr><td class="id">CU-04</td><td>Cambio a mitad de semana</td><td>Gestor</td><td>«Cambio: el miércoles somos 6»</td><td>Recalcula raciones, compra si hace falta, comprobador</td><td>Panel republicado</td></tr>
+<tr><td class="id">CU-05</td><td>Cocinar el día</td><td>Cocinero</td><td>Abre el panel</td><td>—</td><td>Sabe qué cocinar, a qué hora y qué guardar</td></tr>
+<tr><td class="id">CU-06</td><td>Marcar lo hecho</td><td>Cocinero</td><td>Botón «hecho» / «sobraron N»</td><td>Lo guarda en el panel; resumen copiable</td><td>Dato opcional para la actualización</td></tr>
+<tr><td class="id">CU-07</td><td>Hacer la compra</td><td>Comprador</td><td>Pestaña Compra</td><td>Lista por pasillos con tachado</td><td>Compra hecha; lo tachado alimenta el inventario</td></tr>
+<tr><td class="id">CU-08</td><td>Compartir la lista</td><td>Comprador</td><td>Copiar / Compartir</td><td>Texto por pasillos, todo o solo lo pendiente</td><td>Lista en WhatsApp o en una nota</td></tr>
+<tr><td class="id">CU-09</td><td>Confirmar la compra</td><td>Gestor</td><td>«Ya está la compra»</td><td>Mete lo comprado con fecha</td><td>Inventario al día (opcional)</td></tr>
+<tr><td class="id">CU-10</td><td>Consultar qué hay en casa</td><td>Gestor / cocinero</td><td>«¿Qué hay en casa?» o pestaña Casa</td><td>Inventario por zonas, lo que caduca arriba</td><td>Saber qué hay sin abrir el congelador</td></tr>
+<tr><td class="id">CU-11</td><td>Añadir una receta propia</td><td>Gestor</td><td>«Añade esta receta: …» (texto, foto o enlace)</td><td>La pasa a la plantilla con tiempos y máquina</td><td>Receta en el recetario</td></tr>
+<tr><td class="id">CU-12</td><td>Valorar una receta</td><td>Gestor</td><td>En la actualización</td><td>Probada / descartada / nota</td><td>No vuelve a salir si no gustó</td></tr>
+<tr><td class="id">CU-13</td><td>Cambiar una regla</td><td>Gestor</td><td>«Quiero dos recetas nuevas por semana»</td><td>Actualiza la configuración</td><td>El siguiente plan ya lo aplica</td></tr>
+<tr><td class="id">CU-14</td><td>Cambio de etapa de un niño</td><td>IA</td><td>Cumpleaños en la semana planificada</td><td>Avisa y propone cambios antes de aplicarlos</td><td>Menú adaptado a su edad</td></tr>
+<tr><td class="id">CU-15</td><td>Alergia nueva</td><td>Gestor</td><td>«Lucía es alérgica a …»</td><td>Filtra desde el siguiente plan; revisa el congelador</td><td>Nada con el alérgeno para esa persona</td></tr>
+<tr><td class="id">CU-16</td><td>Algo va a caducar</td><td>IA</td><td>Al planificar</td><td>Lo mete en el plan, lo transforma, lo congela o lo propone al gestor</td><td>No se tira comida sin decidirlo</td></tr>
+<tr><td class="id">CU-17</td><td>Se salta una semana</td><td>Gestor</td><td>Sin actualización</td><td>2 preguntas mínimas; el resto <i>por confirmar</i></td><td>Se puede planificar igual</td></tr>
+<tr><td class="id">CU-18</td><td>Pausa (vacaciones)</td><td>Gestor</td><td>«Paramos hasta el …»</td><td>Guarda el estado; al volver, repaso rápido</td><td>Retoma sin rehacer nada</td></tr>
+<tr><td class="id">CU-19</td><td>Entender el sistema</td><td>Cualquiera</td><td>«¿Cómo funciona esto?» o pestaña Cómo funciona</td><td>Explicación con la semana de esa casa</td><td>Alguien nuevo se incorpora</td></tr>
+<tr><td class="id">CU-20</td><td>Actualizar el sistema</td><td>Gestor</td><td>Sustituye <code>sistema/</code></td><td>Compara versiones, explica cambios</td><td>Mejoras sin perder datos</td></tr>
+</tbody></table></div>
+
+<!-- ============ REGLAS ============ -->
+<h2 id="reglas">Reglas que lo sostienen</h2>
+<div class="grid three">
+  <div class="box"><h3>Un plan no es un hecho</h3><p style="margin:0">Nada se descuenta porque estuviera previsto. Solo con confirmación del gestor, o deducido de algo confirmado.</p></div>
+  <div class="box"><h3>Todo tiene un hueco</h3><p style="margin:0">Cada cosa que se cocina, acompañamientos incluidos, va en una sesión con día, cocinero y horas, y la sesión se simula. Si no cabe, el plan no sirve.</p></div>
+  <div class="box"><h3>Cada uno, su plato</h3><p style="margin:0">Quien come distinto (bebé, alergia, dieta) tiene su propia línea en todo: plan, panel y reparto.</p></div>
+</div>
+
+<h3>Jerarquía: cuando dos reglas chocan, manda la de arriba</h3>
+<div class="tbl"><table>
+<thead><tr><th>Nivel</th><th>Regla</th><th>Ejemplo</th></tr></thead>
+<tbody>
+<tr><td class="id">1</td><td><b>Seguridad</b>: alergias, prescripciones, bebés, conservación</td><td>El cacahuete no entra aunque caduque</td></tr>
+<tr><td class="id">2</td><td>Reglas que el gestor marcó como <b>estrictas</b></td><td>«Nunca legumbre dos días seguidos»</td></tr>
+<tr><td class="id">3</td><td><b>Todo tiene hueco y cabe</b></td><td>Un guiso de 5 h no se come el día que se cocina</td></tr>
+<tr><td class="id">4</td><td><b>Usar lo que hay</b>: lo que caduca, el congelador</td><td>Las judías que caducan el martes, el lunes o el martes</td></tr>
+<tr><td class="id">5</td><td>Nutrición y variedad flexibles</td><td>Pescado 2 veces; nada repetido en 3 semanas</td></tr>
+<tr><td class="id">6</td><td>Preferencias y prioridades</td><td>Albóndigas para Lucía; cocinar poco</td></tr>
+<tr><td class="id">—</td><td>Temporada, ahorro y conveniencia, como desempate</td><td>Calabaza en noviembre</td></tr>
+</tbody></table></div>
+<div class="note">Si una regla impide gastar algo, primero se <b>transforma</b> (judías → hummus), después se <b>conserva</b> y, si no hay salida, se <b>propone al gestor</b>. La IA nunca tira nada por su cuenta.</div>
+
+<h3>El comprobador del plan</h3>
+<div class="tbl"><table>
+<thead><tr><th>#</th><th>Regla</th><th>Qué comprueba</th><th>Si falla</th></tr></thead>
+<tbody>
+<tr><td class="id">C1</td><td>Comensales</td><td>Cada comida tiene a todos los que la comen</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C2</td><td>Origen de cada ración</td><td>Cada ración sale de algún sitio y las cuentas cuadran</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C3</td><td>Todo tiene hueco</td><td>Cada elaboración que no sale hecha está en una sesión con día, cocinero y horas</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C4</td><td>Cada sesión cabe</td><td>La simulación acaba en la ventana, con enfriar y guardar; sin solapar máquinas ni manos</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C5</td><td>Llega a tiempo</td><td>Se cocina antes de comerse; tupper de la víspera; descongelación apuntada</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C6</td><td>Seguridad</td><td>Restricciones, etapa, días de conservación, tuppers sin nevera</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C7</td><td>Recetas completas</td><td>Cantidades y pasos con tiempos y máquina</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C8</td><td>Lo que caduca tiene salida</td><td>En el plan, en las ideas, transformado o propuesto</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C9</td><td>Congelador primero</td><td>No cocinar habiendo raciones aptas guardadas</td><td><span class="tag t-warn">avisa</span></td></tr>
+<tr><td class="id">C10</td><td>Variedad</td><td>Repeticiones, platos recientes, ingrediente principal, proteína seguida</td><td><span class="tag t-info">según config.</span></td></tr>
+<tr><td class="id">C11</td><td>Nutrición</td><td>Raciones por grupo de alimentos frente al criterio elegido</td><td><span class="tag t-info">según rigor</span></td></tr>
+<tr><td class="id">C12</td><td>Preferencias</td><td>Nadie recibe algo que no le gusta sin alternativa</td><td><span class="tag t-warn">avisa</span></td></tr>
+<tr><td class="id">C13</td><td>Compra</td><td>Plan − lo que hay + fijos; formato de venta; por pasillos</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C14</td><td>Panel = plan</td><td>Lo que dice el panel es lo aprobado</td><td><span class="tag t-block">bloquea</span></td></tr>
+</tbody></table></div>
+
+<!-- ============ PLATAFORMAS ============ -->
+<h2 id="plataformas">Claude y ChatGPT</h2>
+<div class="tbl"><table>
+<thead><tr><th></th><th>Claude</th><th>ChatGPT</th><th>IA con carpeta (Claude Code…)</th></tr></thead>
+<tbody>
+<tr><td><b>Dónde viven los datos</b></td><td>3 archivos en el proyecto (estado, recetario, histórico)</td><td>Igual</td><td><code>mi-casa/</code>, los escribe la IA</td></tr>
+<tr><td><b>Gesto extra del gestor</b></td><td>Sustituir los archivos que cambien</td><td>Igual</td><td>Ninguno</td></tr>
+<tr><td><b>Panel</b></td><td>Enlace que se comparte y se actualiza en el sitio</td><td>Archivo <code>panel.html</code> por WhatsApp</td><td>Según la IA</td></tr>
+<tr><td><b>Tachado de la compra</b></td><td>Compartido entre móviles <i>(por verificar)</i></td><td>En cada móvil</td><td>—</td></tr>
+<tr><td><b>Sin conexión</b></td><td>«Copiar la semana en texto» (el visor no deja imprimir)</td><td>Botón PDF</td><td>—</td></tr>
+</tbody></table></div>
+
+<!-- ============ REPO ============ -->
+<h2 id="repo">Qué hay en el repo</h2>
+<p>En <a href="https://github.com/sagradoalex/ratatuille">github.com/sagradoalex/ratatuille</a>. Sin datos personales ni recetas reales: el panel trae una familia inventada. <a href="panel-ejemplo.html">Ver el panel de ejemplo</a>.</p>
+<pre class="tree">ratatuille/
+├── LEEME.md             cómo empezar, en una página
+├── VERSION · CAMBIOS.md 1.0.0
+└── sistema/             se sustituye entero al actualizar
+    ├── ARRANQUE.md      para las instrucciones del proyecto
+    ├── INSTRUCCIONES.md cómo piensa: semana, jerarquía, recetas, sesiones, comprobador, compra, panel
+    ├── ONBOARDING.md    presentación, camino rápido, catálogo completo, cierre
+    ├── SEGURIDAD.md     conservación, alergias, bebés y niños (con fuentes AESAN y AEP)
+    ├── ETAPAS.md        8 etapas por edad con su factor de ración
+    ├── DATOS.md         formato de los datos de la casa
+    └── plantillas/      configuración, receta, semana, inventario, estado, recetario, histórico, panel
+(mi-casa/ la crea la IA en la copia de cada familia y nunca se sube)</pre>
+
+<!-- ============ REVISAR ============ -->
+<h2 id="revisar">Qué falta por probar</h2>
+<p>El sistema está escrito y el panel se ha probado en un navegador a tamaño de móvil. <b>Aún no se ha usado con una IA de verdad.</b> Antes de dárselo a nadie, la prueba en frío con una familia inventada:</p>
+<div class="tbl"><table>
+<thead><tr><th>#</th><th>Qué se comprueba</th><th>Si falla</th></tr></thead>
+<tbody>
+<tr><td class="id">P1–P2</td><td>La IA arranca sola con <code>ARRANQUE.md</code> y este cabe en las instrucciones del proyecto</td><td>Acortarlo</td></tr>
+<tr><td class="id">P3</td><td>El onboarding rápido se hace en 15 minutos o menos</td><td>Recortar preguntas</td></tr>
+<tr><td class="id">P4–P6</td><td>Claude: el panel se abre sin cuenta, el tachado se comparte y la IA puede leerlo</td><td>Tachado por móvil y «copiar resumen»</td></tr>
+<tr><td class="id">P7–P8</td><td>ChatGPT: <code>panel.html</code> funciona en iPhone y Android y se imprime bien</td><td>Simplificar el panel</td></tr>
+<tr><td class="id">P9</td><td>Sustituir los 3 archivos lleva menos de 2 minutos</td><td>Juntarlos</td></tr>
+<tr><td class="id">P10</td><td>Buscar recetas en internet y adaptarlas funciona</td><td>Que las cree la IA</td></tr>
+<tr><td class="id">P11</td><td><b>El comprobador caza errores sembrados</b> (alergia, ración que no cuadra, acompañamiento sin hueco)</td><td>Reglas más explícitas</td></tr>
+<tr><td class="id">P12</td><td>La simulación da lo mismo si se repite</td><td>Concretar el método</td></tr>
+<tr><td class="id">P13</td><td>Actualización + plan en 20–25 minutos</td><td>Recortar la presentación del plan</td></tr>
+</tbody></table></div>
+<div class="note red"><b>Dos puntos que conviene que mires tú:</b> los <b>factores de ración por edad</b> son orientativos del sistema, no cifras oficiales; y los plazos de <b>3 días en nevera</b> y <b>24 horas para el arroz</b> son valores prudentes, porque no hay un plazo oficial en días. El resto de la seguridad está contrastado con AESAN y la AEP.</div>
+
+<footer>Ratatuille 1.0.0 · <a href="https://github.com/sagradoalex/ratatuille">Código y documentos</a> · <a href="panel-ejemplo.html">Panel de ejemplo</a> · Licencia CC BY-NC 4.0</footer>
+</main>
+</div>
+
+</body>
+</html>

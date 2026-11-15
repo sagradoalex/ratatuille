@@ -12,6 +12,8 @@ Siempre parte de **lo que ya tienes en casa**, y se adapta a las edades, alergia
 
 **Lo que te pide:** unos 15 minutos para configurarlo y **20 minutos a la semana**, todos el mismo día. Nada más es obligatorio.
 
+👉 **[Guía del sistema](https://sagradoalex.github.io/ratatuille/)**: actores, flujos y casos de uso, para entenderlo antes de empezar. · **[Panel de ejemplo](https://sagradoalex.github.io/ratatuille/panel-ejemplo.html)**: lo que verá tu casa, con una familia inventada.
+
 ---
 
 ## Qué necesitas
@@ -67,5 +69,7 @@ Todo lo demás es opcional: avisar de un cambio («Cambio: el miércoles somos 6
 Sustituye la carpeta `sistema/` (y `LEEME.md`, `VERSION` y `CAMBIOS.md`) por la nueva. **No toques `mi-casa/`** ni tus archivos `estado.md`, `recetario.md` e `historico.md`. Ratatuille te dirá qué ha cambiado.
 
 ## Importante
+
+Licencia: [CC BY-NC 4.0](LICENCIA.md). Puedes usarlo y compartirlo citando la fuente, sin fines comerciales.
 
 Ratatuille **no es consejo médico ni nutricional**. Sigue las guías oficiales (AESAN) y unas reglas de seguridad prudentes, pero las alergias graves, las dietas por enfermedad y la alimentación de los bebés se deciden con vuestro profesional sanitario. **Las etiquetas de los productos las lees tú.**
