@@ -337,7 +337,8 @@ Lo construyes a partir de `plantillas/panel.html`: **solo sustituyes el bloque d
 
 - **En Claude:** publícalo como artefacto y, en cada cambio, **republícalo en el mismo enlace**. Si el entorno permite guardar estado compartido entre quienes lo abren, úsalo para el tachado de la compra y el botón «hecho» (ver el adaptador `window.ratatuilleStore` en la plantilla). Si no, se guardan en cada móvil.
 - **En ChatGPT:** entrega `panel.html` como archivo para descargar y di al gestor que lo mande por WhatsApp a quien lo necesite. El tachado se guarda en cada móvil.
-- **Sin conexión:** el panel tiene un botón para **imprimir o guardar en PDF**.
+- **Sin conexión:** en ChatGPT (panel como archivo), el botón **🖨️ PDF** lo imprime o lo guarda en PDF. En Claude el visor no permite imprimir, así que ese botón se oculta solo (pon `"plataforma": "claude"` en los datos) y queda **«Copiar la semana en texto»**, que se puede pegar en una nota o en WhatsApp.
+- **Compartir la lista:** el botón Compartir usa el menú del móvil; si no está disponible (en Claude no lo está), copia la lista para pegarla donde se quiera.
 
 Antes de publicarlo, C14: que diga exactamente lo que dice el plan aprobado. Al publicarlo, di en una línea qué ha cambiado.
 

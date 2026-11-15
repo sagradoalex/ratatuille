@@ -29,6 +29,7 @@
   --warn:#e3b341; --warn-soft:#3a2f12; --bad:#f2847b; --bad-soft:#3d1c1a; --info-soft:#1c2a3a; --info:#8fb6e3;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 header{padding:16px 16px 0;max-width:980px;margin:0 auto}
@@ -354,7 +355,7 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(function(){ toast("Copiado"); }, viejo); else viejo();
   }
   function compartir(titulo, texto){
-    if (navigator.share) navigator.share({ title: titulo, text: texto }).catch(function(){}); else copiar(texto);
+    if (navigator.share) navigator.share({ title: titulo, text: texto }).catch(function(e){ if (!e || e.name !== "AbortError") copiar(texto); }); else copiar(texto);
   }
   function lista(arr){ return (arr && arr.length) ? '<ul class="clean">' + arr.map(function(x){ return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : '<p class="muted small">Nada.</p>'; }
 
@@ -471,7 +472,19 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
       if (d.ideas && d.ideas.length) h += '<p class="small"><span class="pill">ideas</span> ' + d.ideas.map(esc).join(" · ") + '</p>';
       h += '</div>';
     });
-    $("tab-semana").innerHTML = h + '</div>';
+    h += '</div><div class="btns"><button type="button" class="btn" id="copiar-semana">Copiar la semana en texto</button></div>';
+    $("tab-semana").innerHTML = h;
+    $("copiar-semana").addEventListener("click", function(){
+      var t = (D.semana ? D.semana.titulo : "Semana") + "\n";
+      dias.forEach(function(d){
+        t += "\n" + largo(d.fecha).toUpperCase() + "\n";
+        if (d.libre){ t += d.libre + "\n"; return; }
+        (d.comidas || []).forEach(function(c){ (c.raciones || []).forEach(function(r){ t += "- " + c.comida + " " + (c.hora || "") + " · " + r.quien + ": " + r.plato + " (" + r.origen + ")\n"; }); });
+        (d.sesiones || []).forEach(function(s){ t += "- Cocina " + s.cocinero + " " + s.inicio + "–" + s.fin + "\n"; });
+        if (d.plan_b) t += "- Plan B: " + d.plan_b + "\n";
+      });
+      copiar(t);
+    });
   }
 
   /* ---------- COMPRA ---------- */
@@ -583,8 +596,10 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
     $("tab-como").innerHTML = h;
   }
 
-  /* ---------- Imprimir ---------- */
-  $("imprimir").addEventListener("click", function(){ window.print(); });
+  /* ---------- Imprimir ----------
+     En Claude el visor no permite imprimir: se oculta el botón y queda «Copiar la semana». */
+  if (D.plataforma === "claude") $("imprimir").hidden = true;
+  else $("imprimir").addEventListener("click", function(){ window.print(); });
 
   /* ---------- Arranque ---------- */
   renderHoy(); renderSemana(); renderCompra(); renderRecetas(""); renderHistorico(); renderCasa(); renderComo();
