@@ -1,5 +1,13 @@
 # Cambios
 
+## 1.1.0 · 2026-11-15
+
+- **Recetas de la casa.** El onboarding ofrece, al final y de forma opcional, meter los platos de siempre de la familia.
+- **Importar muchas recetas de golpe**: fotos, textos, enlaces, PDF o audio, en tandas de 5 con tabla resumen y dudas juntas; detecta duplicados y variantes; nunca inventa cantidades.
+- Las recetas de la casa entran como *probadas* y no cuentan como receta nueva.
+- En modo chat, `recetario.md` se entrega una vez al terminar la importación (y cada 3 tandas si es larga).
+- `LEEME`, guía y panel de ejemplo explican cómo meter recetas.
+
 ## 1.0.0 · 2026-11-15
 
 Primera versión.

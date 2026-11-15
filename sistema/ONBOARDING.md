@@ -281,6 +281,10 @@ Enséñalo en una tabla por **congelador / nevera / despensa**, con lo que caduc
 3. **Primera semana**: la siguiente a hoy, salvo que el gestor pida otra cosa. Los días que queden hasta entonces, con lo que hay en casa.
 4. **Día de planificación**: fijo cada semana (por defecto, 1–2 días antes de la compra grande).
 5. **Expectativas**: «Las primeras semanas iré aprendiendo cómo es tu casa. Lo que necesito de ti es la actualización de cada semana, con instrucciones claras: qué se hizo, qué queda y qué cambia. Con eso me ajusto; sin eso, planifico a ciegas.»
+6. **Recetas de la casa (opcional)**, en cualquiera de los dos caminos:
+   > «Una última cosa, opcional: **¿tenéis platos de la casa que queráis que use?** Son los que mejor funcionan las primeras semanas, porque ya sé que gustan. Mándame fotos de la libreta o del libro, enlaces, o díctamelos como los haces. **Ahora o cuando quieras**: basta con decirme "Añade esta receta" o "Tengo varias recetas".»
+
+   Si las da ahora, impórtalas como dice `INSTRUCCIONES.md` §8.4 **antes** de diseñar la primera semana, para que ya entren en ella. Si no, sigue: el gestor puede hacerlo en cualquier momento.
 
 Y después, en este orden:
 1. **Guarda los datos** (`DATOS.md`) y explica en una frase cada archivo:

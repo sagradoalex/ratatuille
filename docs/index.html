@@ -130,7 +130,7 @@ html{scroll-behavior:smooth}
 </aside>
 
 <main>
-<p class="eyebrow">Ratatuille 1.0.0 · guía para revisar · 2026-11-15</p>
+<p class="eyebrow">Ratatuille 1.1.0 · guía para revisar · 2026-11-15</p>
 <h1>Ratatuille, planificador de cocina en casa</h1>
 <p class="lead">Una IA de pago (Claude o ChatGPT) que, cargada con unos archivos, planifica las comidas de una casa semana a semana. Esta guía explica quién lo usa, qué pasa en cada momento y qué reglas lo hacen fiable, para que puedas revisarlo antes de dárselo a nadie.</p>
 
@@ -301,6 +301,7 @@ html{scroll-behavior:smooth}
 </svg>
 </div>
 <p>Las 9 preguntas del camino rápido: quiénes sois y las fechas de nacimiento de los menores · alergias y bebés · qué comidas y qué días · quién come fuera o lleva tupper · quién cocina y qué días · desde qué hora y hasta cuándo · qué máquinas · cuándo y dónde se compra · repaso exprés de congelador y nevera.</p>
+<p>Al final, en los dos caminos, un paso <b>opcional</b>: «¿Tenéis platos de la casa que queráis que use?». Se pueden meter en ese momento (y entran ya en la primera semana) o cuando se quiera.</p>
 <div class="note green"><b>La seguridad nunca se aplaza:</b> alergias, dietas obligatorias y bebés se preguntan siempre al principio, en cualquier camino. Lo demás arranca con valores por defecto y se afina con como mucho 3 preguntas al cerrar cada una de las 4 primeras semanas.</div>
 
 <h3>F3 · Ciclo semanal</h3>
@@ -364,7 +365,8 @@ html{scroll-behavior:smooth}
 <tr><td class="id">CU-08</td><td>Compartir la lista</td><td>Comprador</td><td>Copiar / Compartir</td><td>Texto por pasillos, todo o solo lo pendiente</td><td>Lista en WhatsApp o en una nota</td></tr>
 <tr><td class="id">CU-09</td><td>Confirmar la compra</td><td>Gestor</td><td>«Ya está la compra»</td><td>Mete lo comprado con fecha</td><td>Inventario al día (opcional)</td></tr>
 <tr><td class="id">CU-10</td><td>Consultar qué hay en casa</td><td>Gestor / cocinero</td><td>«¿Qué hay en casa?» o pestaña Casa</td><td>Inventario por zonas, lo que caduca arriba</td><td>Saber qué hay sin abrir el congelador</td></tr>
-<tr><td class="id">CU-11</td><td>Añadir una receta propia</td><td>Gestor</td><td>«Añade esta receta: …» (texto, foto o enlace)</td><td>La pasa a la plantilla con tiempos y máquina</td><td>Receta en el recetario</td></tr>
+<tr><td class="id">CU-11</td><td>Añadir una receta de la casa</td><td>Gestor</td><td>«Añade esta receta: …» (texto, foto, enlace o audio)</td><td>La pasa a la ficha con tiempos y máquina; pregunta lo que no deduce, sin inventar cantidades</td><td>Receta <i>probada</i>, la primera que usará</td></tr>
+<tr><td class="id">CU-21</td><td>Meter muchas recetas de golpe</td><td>Gestor</td><td>«Tengo varias recetas» y fotos o textos</td><td>Tandas de 5 con tabla resumen y dudas juntas; detecta duplicados y variantes</td><td>Recetario de la casa lleno; en chat, un solo <code>recetario.md</code> que sustituir</td></tr>
 <tr><td class="id">CU-12</td><td>Valorar una receta</td><td>Gestor</td><td>En la actualización</td><td>Probada / descartada / nota</td><td>No vuelve a salir si no gustó</td></tr>
 <tr><td class="id">CU-13</td><td>Cambiar una regla</td><td>Gestor</td><td>«Quiero dos recetas nuevas por semana»</td><td>Actualiza la configuración</td><td>El siguiente plan ya lo aplica</td></tr>
 <tr><td class="id">CU-14</td><td>Cambio de etapa de un niño</td><td>IA</td><td>Cumpleaños en la semana planificada</td><td>Avisa y propone cambios antes de aplicarlos</td><td>Menú adaptado a su edad</td></tr>
@@ -435,7 +437,7 @@ html{scroll-behavior:smooth}
 <p>En <a href="https://github.com/sagradoalex/ratatuille">github.com/sagradoalex/ratatuille</a>. Sin datos personales ni recetas reales: el panel trae una familia inventada. <a href="panel-ejemplo.html">Ver el panel de ejemplo</a>.</p>
 <pre class="tree">ratatuille/
 ├── LEEME.md             cómo empezar, en una página
-├── VERSION · CAMBIOS.md 1.0.0
+├── VERSION · CAMBIOS.md 1.1.0
 └── sistema/             se sustituye entero al actualizar
     ├── ARRANQUE.md      para las instrucciones del proyecto
     ├── INSTRUCCIONES.md cómo piensa: semana, jerarquía, recetas, sesiones, comprobador, compra, panel
@@ -464,7 +466,7 @@ html{scroll-behavior:smooth}
 </tbody></table></div>
 <div class="note red"><b>Dos puntos que conviene que mires tú:</b> los <b>factores de ración por edad</b> son orientativos del sistema, no cifras oficiales; y los plazos de <b>3 días en nevera</b> y <b>24 horas para el arroz</b> son valores prudentes, porque no hay un plazo oficial en días. El resto de la seguridad está contrastado con AESAN y la AEP.</div>
 
-<footer>Ratatuille 1.0.0 · <a href="https://github.com/sagradoalex/ratatuille">Código y documentos</a> · <a href="panel-ejemplo.html">Panel de ejemplo</a> · Licencia CC BY-NC 4.0</footer>
+<footer>Ratatuille 1.1.0 · <a href="https://github.com/sagradoalex/ratatuille">Código y documentos</a> · <a href="panel-ejemplo.html">Panel de ejemplo</a> · Licencia CC BY-NC 4.0</footer>
 </main>
 </div>
 

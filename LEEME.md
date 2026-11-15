@@ -51,6 +51,15 @@ Si usas una IA que lee y escribe en una carpeta de tu ordenador (por ejemplo, Cl
 
 Todo lo demás es opcional: avisar de un cambio («Cambio: el miércoles somos 6»), tachar en la compra o que quien cocina marque lo que ha hecho.
 
+## Tus recetas
+
+Ratatuille empieza sin recetas y las va creando o buscando para cada plan. Pero **las mejores son las vuestras**, porque ya sabéis que gustan. Para meterlas, díselo en cualquier momento:
+
+- **Una:** «Añade esta receta» y pega el texto, manda una foto (de la libreta, del libro), un enlace o un audio contando cómo la haces.
+- **Muchas:** «Tengo varias recetas» y manda las fotos o los textos. Las procesa de 5 en 5, te enseña un resumen de cada tanda y te pregunta todas las dudas juntas.
+
+Las pasa a su ficha, con los tiempos de cada paso que necesita para planificar, y las usa antes que cualquier otra. Nunca se inventa una cantidad: si algo no se lee, pregunta. **Si usas un proyecto de chat**, al terminar te dará el `recetario.md` actualizado: sustitúyelo en el proyecto o se perderán.
+
 ## Qué hay en esta carpeta
 
 | | |
