@@ -297,7 +297,8 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
     { "semana": "Semana del 9 al 15 de noviembre", "planificado": "Garbanzos con espinacas · Albóndigas en salsa · Salmón al horno", "hecho": "Todo menos el salmón (se comió fuera el jueves)", "nota": "Sobraron 2 raciones de albóndigas: al congelador. El salmón pasa a la semana siguiente si no caduca." }
   ],
   "inventario": {
-    "congelador": [ { "nombre": "Albóndigas en salsa", "cantidad": "1 ración (la de Javi del lunes, reservada)", "estado": "ok" }, { "nombre": "Merluza", "cantidad": "2 lomos", "estado": "ok" } ],
+    "preparado": [ { "nombre": "Albóndigas en salsa", "cantidad": "1 ración, congelador (la de Javi del lunes, reservada)", "estado": "ok" } ],
+    "congelador": [ { "nombre": "Merluza", "cantidad": "2 lomos", "estado": "ok" }, { "nombre": "Muslos de pollo", "cantidad": "1 bandeja (para el miércoles)", "estado": "ok" } ],
     "nevera": [ { "nombre": "Calabacín", "cantidad": "2", "estado": "urgente" }, { "nombre": "Garbanzos cocidos (bote abierto)", "cantidad": "1 bote", "estado": "pronto" }, { "nombre": "Leche", "cantidad": "1 brick", "estado": "por confirmar" } ],
     "despensa": [ { "nombre": "Arroz", "cantidad": "Queda poco", "estado": "por confirmar" }, { "nombre": "Aceite de oliva", "cantidad": "Hay", "estado": "ok" } ]
   },
@@ -575,7 +576,7 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
     var inv = D.inventario || {};
     var etiqueta = { urgente: '<span class="inv-urgente">gastar ya</span>', pronto: '<span class="inv-pronto">pronto</span>', "por confirmar": '<span class="pill">por confirmar</span>', ok: '' };
     var h = '<h2>Qué hay en casa</h2><p class="muted small">Solo para consultar. Lo mantiene Ratatuille con la actualización semanal.</p>';
-    [["congelador","❄️ Congelador"],["nevera","🧊 Nevera"],["despensa","🥫 Despensa"]].forEach(function(z){
+    [["preparado","🍲 Ya preparado"],["nevera","🧊 Nevera"],["congelador","❄️ Congelador"],["despensa","🥫 Despensa"]].forEach(function(z){
       var arr = inv[z[0]] || [];
       h += '<div class="card"><h3>' + z[1] + '</h3>' + (arr.length ? '<table><thead><tr><th>Qué</th><th>Cuánto</th><th></th></tr></thead><tbody>' + arr.map(function(a){ return '<tr><td>' + esc(a.nombre) + '</td><td>' + esc(a.cantidad) + '</td><td>' + (etiqueta[a.estado] || "") + '</td></tr>'; }).join("") + '</tbody></table>' : '<p class="muted small">Vacío.</p>') + '</div>';
     });

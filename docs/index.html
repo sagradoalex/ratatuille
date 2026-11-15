@@ -130,7 +130,7 @@ html{scroll-behavior:smooth}
 </aside>
 
 <main>
-<p class="eyebrow">Ratatuille 1.1.0 · guía para revisar · 2026-11-15</p>
+<p class="eyebrow">Ratatuille 1.2.0 · guía para revisar · 2026-11-15</p>
 <h1>Ratatuille, planificador de cocina en casa</h1>
 <p class="lead">Una IA de pago (Claude o ChatGPT) que, cargada con unos archivos, planifica las comidas de una casa semana a semana. Esta guía explica quién lo usa, qué pasa en cada momento y qué reglas lo hacen fiable, para que puedas revisarlo antes de dárselo a nadie.</p>
 
@@ -300,7 +300,7 @@ html{scroll-behavior:smooth}
   <path d="M420 206 C520 206 600 180 658 160" class="dg-l" marker-end="url(#ar2)"/>
 </svg>
 </div>
-<p>Las 9 preguntas del camino rápido: quiénes sois y las fechas de nacimiento de los menores · alergias y bebés · qué comidas y qué días · quién come fuera o lleva tupper · quién cocina y qué días · desde qué hora y hasta cuándo · qué máquinas · cuándo y dónde se compra · repaso exprés de congelador y nevera.</p>
+<p>Las 9 preguntas del camino rápido: quiénes sois y las fechas de nacimiento de los menores · alergias y bebés · qué comidas y qué días · quién come fuera o lleva tupper · quién cocina y qué días · desde qué hora y hasta cuándo · qué máquinas · cuándo y dónde se compra · repaso exprés de lo que hay: lo ya preparado, la nevera, el congelador y la despensa.</p>
 <p>Al final, en los dos caminos, un paso <b>opcional</b>: «¿Tenéis platos de la casa que queráis que use?». Se pueden meter en ese momento (y entran ya en la primera semana) o cuando se quiera.</p>
 <div class="note green"><b>La seguridad nunca se aplaza:</b> alergias, dietas obligatorias y bebés se preguntan siempre al principio, en cualquier camino. Lo demás arranca con valores por defecto y se afina con como mucho 3 preguntas al cerrar cada una de las 4 primeras semanas.</div>
 
@@ -319,18 +319,18 @@ html{scroll-behavior:smooth}
 <thead><tr><th>#</th><th>Pregunta</th><th>Cómo la presenta la IA</th><th>Ejemplo de respuesta</th></tr></thead>
 <tbody>
 <tr><td class="id">1</td><td>¿Qué se cocinó y qué no?</td><td>Los platos del plan, con ✓ por defecto</td><td>«Todo menos el pescado del jueves»</td></tr>
-<tr><td class="id">2</td><td>¿Qué queda cocinado?</td><td>Las raciones que deberían quedar</td><td>«Quedan 3 de lentejas, no 4»</td></tr>
-<tr><td class="id">3</td><td>¿Qué se acabó, sobra o hay que gastar ya? ¿Cambió algo de la compra?</td><td>Más los básicos que se estarían acabando</td><td>«Se acabaron los huevos. Compré pollo de más»</td></tr>
+<tr><td class="id">2</td><td>¿Qué queda preparado?</td><td>Las raciones que deberían quedar, en nevera y congelador</td><td>«Quedan 3 de lentejas, no 4»</td></tr>
+<tr><td class="id">3</td><td>¿Qué se acabó, sobra o hay que gastar ya en la nevera, el congelador o la despensa? ¿Cambió algo de la compra?</td><td>Lo que caduca pronto y los básicos que se estarían acabando</td><td>«Se acabaron los huevos. Compré pollo de más»</td></tr>
 <tr><td class="id">4</td><td>¿Qué cambia la semana que viene?</td><td>—</td><td>«El miércoles viene la abuela»</td></tr>
 </tbody></table></div>
-<p>Si se salta una semana, la IA solo pregunta dos cosas (qué queda en el congelador y qué cambia) y marca el resto <i>por confirmar</i>. En modo chat, al terminar dice qué archivo sustituir en el proyecto.</p>
+<p>Si se salta una semana, la IA solo pregunta lo mínimo (qué hay preparado, qué hay que gastar ya y qué cambia) y marca el resto <i>por confirmar</i>. En modo chat, al terminar dice qué archivo sustituir en el proyecto.</p>
 
 <h3>F5 · Cómo se diseña un plan</h3>
 <ol class="steps">
   <li><span class="n">1</span><span><b>Etapas</b> de cada persona por su edad. Si alguien cambia de etapa, lo avisa antes.</span></li>
   <li><span class="n">2</span><span><b>Quién come</b> cada comida de cada día, y dónde.</span></li>
   <li><span class="n">3</span><span><b>Raciones</b> con el factor de cada etapa y el ajuste de cada persona.</span></li>
-  <li><span class="n">4</span><span><b>Lo que hay que gastar</b>: lo que caduca y lo del congelador, primero.</span></li>
+  <li><span class="n">4</span><span><b>Lo que hay que gastar</b>: lo ya preparado y lo que caduca, esté en la nevera, el congelador o la despensa, primero.</span></li>
   <li><span class="n">5</span><span><b>Recetas</b>: recetario de la casa → internet → creada por la IA. Siempre hay solución.</span></li>
   <li><span class="n">6</span><span><b>Sesiones</b>: cada elaboración a un hueco con día, cocinero y horas, y <b>simulación</b> de cada sesión.</span></li>
   <li><span class="n">7</span><span><b>Reparto y plan B</b>: víspera, antes de cocinar, al servir, al terminar.</span></li>
@@ -364,13 +364,13 @@ html{scroll-behavior:smooth}
 <tr><td class="id">CU-07</td><td>Hacer la compra</td><td>Comprador</td><td>Pestaña Compra</td><td>Lista por pasillos con tachado</td><td>Compra hecha; lo tachado alimenta el inventario</td></tr>
 <tr><td class="id">CU-08</td><td>Compartir la lista</td><td>Comprador</td><td>Copiar / Compartir</td><td>Texto por pasillos, todo o solo lo pendiente</td><td>Lista en WhatsApp o en una nota</td></tr>
 <tr><td class="id">CU-09</td><td>Confirmar la compra</td><td>Gestor</td><td>«Ya está la compra»</td><td>Mete lo comprado con fecha</td><td>Inventario al día (opcional)</td></tr>
-<tr><td class="id">CU-10</td><td>Consultar qué hay en casa</td><td>Gestor / cocinero</td><td>«¿Qué hay en casa?» o pestaña Casa</td><td>Inventario por zonas, lo que caduca arriba</td><td>Saber qué hay sin abrir el congelador</td></tr>
+<tr><td class="id">CU-10</td><td>Consultar qué hay en casa</td><td>Gestor / cocinero</td><td>«¿Qué hay en casa?» o pestaña Casa</td><td>Ya preparado, nevera, congelador y despensa, con lo que caduca arriba</td><td>Saber qué hay sin abrir el congelador</td></tr>
 <tr><td class="id">CU-11</td><td>Añadir una receta de la casa</td><td>Gestor</td><td>«Añade esta receta: …» (texto, foto, enlace o audio)</td><td>La pasa a la ficha con tiempos y máquina; pregunta lo que no deduce, sin inventar cantidades</td><td>Receta <i>probada</i>, la primera que usará</td></tr>
 <tr><td class="id">CU-21</td><td>Meter muchas recetas de golpe</td><td>Gestor</td><td>«Tengo varias recetas» y fotos o textos</td><td>Tandas de 5 con tabla resumen y dudas juntas; detecta duplicados y variantes</td><td>Recetario de la casa lleno; en chat, un solo <code>recetario.md</code> que sustituir</td></tr>
 <tr><td class="id">CU-12</td><td>Valorar una receta</td><td>Gestor</td><td>En la actualización</td><td>Probada / descartada / nota</td><td>No vuelve a salir si no gustó</td></tr>
 <tr><td class="id">CU-13</td><td>Cambiar una regla</td><td>Gestor</td><td>«Quiero dos recetas nuevas por semana»</td><td>Actualiza la configuración</td><td>El siguiente plan ya lo aplica</td></tr>
 <tr><td class="id">CU-14</td><td>Cambio de etapa de un niño</td><td>IA</td><td>Cumpleaños en la semana planificada</td><td>Avisa y propone cambios antes de aplicarlos</td><td>Menú adaptado a su edad</td></tr>
-<tr><td class="id">CU-15</td><td>Alergia nueva</td><td>Gestor</td><td>«Lucía es alérgica a …»</td><td>Filtra desde el siguiente plan; revisa el congelador</td><td>Nada con el alérgeno para esa persona</td></tr>
+<tr><td class="id">CU-15</td><td>Alergia nueva</td><td>Gestor</td><td>«Lucía es alérgica a …»</td><td>Filtra desde el siguiente plan; revisa lo ya preparado</td><td>Nada con el alérgeno para esa persona</td></tr>
 <tr><td class="id">CU-16</td><td>Algo va a caducar</td><td>IA</td><td>Al planificar</td><td>Lo mete en el plan, lo transforma, lo congela o lo propone al gestor</td><td>No se tira comida sin decidirlo</td></tr>
 <tr><td class="id">CU-17</td><td>Se salta una semana</td><td>Gestor</td><td>Sin actualización</td><td>2 preguntas mínimas; el resto <i>por confirmar</i></td><td>Se puede planificar igual</td></tr>
 <tr><td class="id">CU-18</td><td>Pausa (vacaciones)</td><td>Gestor</td><td>«Paramos hasta el …»</td><td>Guarda el estado; al volver, repaso rápido</td><td>Retoma sin rehacer nada</td></tr>
@@ -393,7 +393,7 @@ html{scroll-behavior:smooth}
 <tr><td class="id">1</td><td><b>Seguridad</b>: alergias, prescripciones, bebés, conservación</td><td>El cacahuete no entra aunque caduque</td></tr>
 <tr><td class="id">2</td><td>Reglas que el gestor marcó como <b>estrictas</b></td><td>«Nunca legumbre dos días seguidos»</td></tr>
 <tr><td class="id">3</td><td><b>Todo tiene hueco y cabe</b></td><td>Un guiso de 5 h no se come el día que se cocina</td></tr>
-<tr><td class="id">4</td><td><b>Usar lo que hay</b>: lo que caduca, el congelador</td><td>Las judías que caducan el martes, el lunes o el martes</td></tr>
+<tr><td class="id">4</td><td><b>Usar lo que hay</b>: lo que caduca y lo ya preparado, antes que cocinar más</td><td>Las judías que caducan el martes, el lunes o el martes</td></tr>
 <tr><td class="id">5</td><td>Nutrición y variedad flexibles</td><td>Pescado 2 veces; nada repetido en 3 semanas</td></tr>
 <tr><td class="id">6</td><td>Preferencias y prioridades</td><td>Albóndigas para Lucía; cocinar poco</td></tr>
 <tr><td class="id">—</td><td>Temporada, ahorro y conveniencia, como desempate</td><td>Calabaza en noviembre</td></tr>
@@ -412,7 +412,7 @@ html{scroll-behavior:smooth}
 <tr><td class="id">C6</td><td>Seguridad</td><td>Restricciones, etapa, días de conservación, tuppers sin nevera</td><td><span class="tag t-block">bloquea</span></td></tr>
 <tr><td class="id">C7</td><td>Recetas completas</td><td>Cantidades y pasos con tiempos y máquina</td><td><span class="tag t-block">bloquea</span></td></tr>
 <tr><td class="id">C8</td><td>Lo que caduca tiene salida</td><td>En el plan, en las ideas, transformado o propuesto</td><td><span class="tag t-block">bloquea</span></td></tr>
-<tr><td class="id">C9</td><td>Congelador primero</td><td>No cocinar habiendo raciones aptas guardadas</td><td><span class="tag t-warn">avisa</span></td></tr>
+<tr><td class="id">C9</td><td>Lo preparado primero</td><td>No cocinar habiendo raciones ya preparadas aptas, en la nevera o en el congelador</td><td><span class="tag t-warn">avisa</span></td></tr>
 <tr><td class="id">C10</td><td>Variedad</td><td>Repeticiones, platos recientes, ingrediente principal, proteína seguida</td><td><span class="tag t-info">según config.</span></td></tr>
 <tr><td class="id">C11</td><td>Nutrición</td><td>Raciones por grupo de alimentos frente al criterio elegido</td><td><span class="tag t-info">según rigor</span></td></tr>
 <tr><td class="id">C12</td><td>Preferencias</td><td>Nadie recibe algo que no le gusta sin alternativa</td><td><span class="tag t-warn">avisa</span></td></tr>
@@ -437,7 +437,7 @@ html{scroll-behavior:smooth}
 <p>En <a href="https://github.com/sagradoalex/ratatuille">github.com/sagradoalex/ratatuille</a>. Sin datos personales ni recetas reales: el panel trae una familia inventada. <a href="panel-ejemplo.html">Ver el panel de ejemplo</a>.</p>
 <pre class="tree">ratatuille/
 ├── LEEME.md             cómo empezar, en una página
-├── VERSION · CAMBIOS.md 1.1.0
+├── VERSION · CAMBIOS.md 1.2.0
 └── sistema/             se sustituye entero al actualizar
     ├── ARRANQUE.md      para las instrucciones del proyecto
     ├── INSTRUCCIONES.md cómo piensa: semana, jerarquía, recetas, sesiones, comprobador, compra, panel
@@ -466,7 +466,7 @@ html{scroll-behavior:smooth}
 </tbody></table></div>
 <div class="note red"><b>Dos puntos que conviene que mires tú:</b> los <b>factores de ración por edad</b> son orientativos del sistema, no cifras oficiales; y los plazos de <b>3 días en nevera</b> y <b>24 horas para el arroz</b> son valores prudentes, porque no hay un plazo oficial en días. El resto de la seguridad está contrastado con AESAN y la AEP.</div>
 
-<footer>Ratatuille 1.1.0 · <a href="https://github.com/sagradoalex/ratatuille">Código y documentos</a> · <a href="panel-ejemplo.html">Panel de ejemplo</a> · Licencia CC BY-NC 4.0</footer>
+<footer>Ratatuille 1.2.0 · <a href="https://github.com/sagradoalex/ratatuille">Código y documentos</a> · <a href="panel-ejemplo.html">Panel de ejemplo</a> · Licencia CC BY-NC 4.0</footer>
 </main>
 </div>
 

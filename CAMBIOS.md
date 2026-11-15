@@ -1,5 +1,13 @@
 # Cambios
 
+## 1.2.0 · 2026-11-15
+
+- **Todo el inventario, no solo el congelador.** El sistema pregunta y razona siempre, en este orden, por lo **ya preparado** (tuppers y sobras, en la nevera o en el congelador), la **nevera**, el **congelador** y la **despensa**.
+- Repaso exprés del onboarding con las cuatro zonas (unos 5 minutos) y repaso completo empezando por lo preparado.
+- Actualización semanal: «¿Qué queda preparado?» y «¿qué hay que gastar ya en la nevera, el congelador o la despensa?».
+- La regla C9 pasa a ser **«Lo preparado primero»**.
+- Panel: la pestaña Casa tiene una sección **Ya preparado**.
+
 ## 1.1.0 · 2026-11-15
 
 - **Recetas de la casa.** El onboarding ofrece, al final y de forma opcional, meter los platos de siempre de la familia.

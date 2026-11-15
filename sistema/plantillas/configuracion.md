@@ -61,7 +61,7 @@ Días variables y cómo se llevan:
 
 ## Reglas de reparto
 
-- *(Deducidas de lo anterior. Ejemplo: «El tupper de Javi sale de la víspera o del congelador».)*
+- *(Deducidas de lo anterior. Ejemplo: «El tupper de Javi sale de lo cocinado la víspera o de algo ya preparado».)*
 
 ## Cocineros
 

@@ -45,7 +45,7 @@ Si usas una IA que lee y escribe en una carpeta de tu ordenador (por ejemplo, Cl
 
 ## Cada semana
 
-1. **El día de planificación**, escribe **«Plan de la semana»**. Te enseñará lo que cree que ha pasado y solo tendrás que corregir (5 minutos). Después te propone el plan y la lista (15 minutos).
+1. **El día de planificación**, escribe **«Plan de la semana»**. Te enseñará lo que cree que ha pasado (qué se cocinó, qué queda preparado y qué hay que gastar en la nevera, el congelador o la despensa) y solo tendrás que corregir (5 minutos). Después te propone el plan y la lista (15 minutos).
 2. **Si usas un proyecto de chat**, al terminar te dirá qué archivo actualizado tienes que **sustituir** en el proyecto. Hazlo: es su memoria.
 3. **Compra** con la pestaña Compra del panel.
 

@@ -76,7 +76,7 @@ Al terminar una conversación en la que algo cambió, la IA entrega **completo**
 ```
 
 - `lugar`: `congelador`, `nevera` o `despensa`.
-- `cocinado`: `true` si es comida ya hecha; entonces `raciones` dice cuántas.
+- `cocinado`: `true` si es comida **ya preparada** (tuppers, sobras, guisos), esté en la nevera o en el congelador; entonces `raciones` dice cuántas. Lo preparado se usa antes que cocinar más.
 - `reservado_para`: la fecha y la comida de la semana en curso que lo necesita, o `null`. Lo reservado no se usa en el plan nuevo.
 - La **caducidad no se guarda**: se calcula con `entrada` y `productos.json`, o con la fecha de la etiqueta si el gestor la da (`"caduca": "2026-11-21"`).
 
@@ -132,7 +132,7 @@ El panel (`plantillas/panel.html`) **no calcula nada**: pinta lo que recibe. La 
 | `recetas[]` | Fichas resumidas: `nombre`, `tipo`, `manos_min`, `total_min`, `maquina`, `raciones`, `estado`, `tiempos`, `en_semana`, `ingredientes[]`, `pasos[]`, `adaptaciones[]`, `conservacion` |
 | `compra` | `id` (único por compra), `titulo`, `fecha`, `tienda`, `revisar_en_casa[]` y `pasillos[]`, cada uno con `nombre` y `articulos[]` (`id`, `nombre`, `cantidad`, `para`, `etiqueta`) |
 | `historico[]` | Por semana: `semana`, `planificado`, `hecho` y `nota` |
-| `inventario` | `congelador[]`, `nevera[]` y `despensa[]` con `nombre`, `cantidad` y `estado` (`ok`, `pronto`, `urgente` o `por confirmar`) |
+| `inventario` | `preparado[]` (comida ya hecha, esté donde esté), `nevera[]`, `congelador[]` y `despensa[]`, cada uno con `nombre`, `cantidad` y `estado` (`ok`, `pronto`, `urgente` o `por confirmar`). En `preparado`, la `cantidad` dice también dónde está («3 raciones, congelador») |
 | `como_funciona` | `calendario[]` (`dia`, `que`, `quien`, `duracion`), `papeles[]`, `obligatorio[]`, `opcional[]`, `si_pasa[]` (`situacion`, `que_hacer`), `cambiar[]` y `primeras_semanas[]` |
 
 En `raciones[]`, `aparte: true` marca a quien come distinto (bebé, alergia): el panel lo pinta en su propia línea.

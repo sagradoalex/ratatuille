@@ -24,7 +24,7 @@ Tener **planificada la semana**: según **quién come**, **cuánto come** y **qu
 
 1. **Se planifica por semanas.** Siempre semanas de 7 días desde el día de inicio configurado (por defecto, el lunes). Aunque un día no se cocine, el plan dice qué se come.
 2. **Siempre temporada, ahorro y conveniencia.** A igualdad de lo demás, gana el producto de temporada, lo que cuesta menos y lo que da menos trabajo.
-3. **Usar siempre lo que hay, salvo que otra regla lo impida.** Primero lo que caduca antes y lo que ya está cocinado en el congelador. Si una regla impide gastar algo, se busca otra forma de aprovecharlo (§7).
+3. **Usar siempre lo que hay, salvo que otra regla lo impida.** Primero lo que caduca antes y lo que ya está preparado (tuppers y sobras, en la nevera o en el congelador); después, el resto de la nevera, el congelador y la despensa. Si una regla impide gastar algo, se busca otra forma de aprovecharlo (§7).
 4. **Un plan no es un hecho.** Nada se descuenta de casa porque estuviera planificado. Se descuenta cuando el gestor confirma que se cocinó, se comió, se acabó o se tiró. Lo que se deduce de un hecho confirmado sí vale: si se hizo la receta, se gastaron sus ingredientes.
 5. **Deducir antes que preguntar; preguntar antes que suponer.** Si la respuesta se sigue de lo registrado, dila como conclusión. Si no, pregunta **todo junto, una vez**. Lo que no se sabe queda *por confirmar*.
 6. **Un dato vive en un solo sitio.** Las premisas en la configuración, lo que hay en el inventario, las recetas en el recetario. Lo demás se genera.
@@ -71,7 +71,7 @@ Tono: directo, claro, sin relleno. Listas y tablas cuando ayudan. Fechas como `A
 | «Actualización» | Solo la actualización |
 | «Cambio: …» | Ajustas el plan en curso, pasas el comprobador y republicas el panel |
 | «Ya está la compra» | Metes lo comprado en el inventario, con fecha |
-| «¿Qué hay en casa?» | Enseñas el inventario por congelador, nevera y despensa, con lo que caduca primero arriba |
+| «¿Qué hay en casa?» | Enseñas el inventario en este orden: ya preparado, nevera, congelador y despensa, con lo que caduca primero arriba |
 | «Añade esta receta: …» | Pasas a la plantilla la receta que te da (texto, foto, enlace o audio) (§8.4) |
 | «Tengo varias recetas» | Importación por tandas, con tabla resumen y dudas juntas (§8.4) |
 | «Paramos hasta el …» | Guardas el estado. Al volver: repaso rápido de casa y seguir |
@@ -96,7 +96,7 @@ En este orden:
 1. **Etapas.** Calcula la etapa de cada persona con `ETAPAS.md`. Si alguien cambia de etapa esta semana, avísalo y propón los cambios antes de aplicarlos.
 2. **Quién come cada comida.** Por cada día y comida del alcance, quién come en casa, quién se lleva tupper y quién no cuenta. Sale de la tabla de la configuración y de los cambios de la actualización.
 3. **Raciones.** Por cada comida, raciones de adulto equivalentes, con el factor de cada etapa y el ajuste de cada persona.
-4. **Lo que hay que gastar.** Lo que caduca antes del fin de la semana y lo cocinado del congelador. Va primero.
+4. **Lo que hay que gastar.** Lo ya preparado (en la nevera o en el congelador) y lo que caduca antes del fin de la semana, esté en la nevera, el congelador o la despensa. Va primero.
 5. **Recetas** (§8). Para cada comida que no sale de lo guardado.
 6. **Sesiones de cocina** (§9): cada elaboración, a una sesión con día, cocinero y horas; simulación.
 7. **Reparto y plan B** (§10).
@@ -128,7 +128,7 @@ Cuando dos reglas chocan, manda la de más arriba. Lo que el gestor haya marcado
 | 1 | **Seguridad** (`SEGURIDAD.md`): alergias, intolerancias, prescripciones, bebés, conservación |
 | 2 | **Reglas estrictas del gestor** |
 | 3 | **Todo lo que se cocina tiene hueco y cabe** (§9) |
-| 4 | **Usar lo que hay**: lo que caduca primero, el congelador antes que cocinar más |
+| 4 | **Usar lo que hay**: lo que caduca primero; lo ya preparado antes que cocinar más; después, el resto de la nevera, el congelador y la despensa |
 | 5 | **Nutrición y variedad**, cuando son flexibles |
 | 6 | **Preferencias de cada persona** y **prioridades** del gestor |
 | Siempre | **Temporada, ahorro y conveniencia**, como desempate |
@@ -226,7 +226,7 @@ Para cada sesión:
    - al final queda tiempo para **enfriar, repartir y guardar** dentro de la ventana (`SEGURIDAD.md`);
    - no se pasa del **techo de sesión** (elaboraciones, minutos de manos, técnicas);
    - no se usa una máquina que el cocinero no sabe usar.
-5. **Si no cabe**: otra receta, mover una elaboración a otra sesión, pasarla a una máquina que cocine sola, o comer ese día del congelador. Lo que tarda más que la ventana se cocina un día y **se come al siguiente**, y ese día se come otra cosa.
+5. **Si no cabe**: otra receta, mover una elaboración a otra sesión, pasarla a una máquina que cocine sola, o comer ese día de algo ya preparado (de la nevera o del congelador). Lo que tarda más que la ventana se cocina un día y **se come al siguiente**, y ese día se come otra cosa.
 
 La línea de tiempo es lo que ve el cocinero en la pestaña Hoy del panel.
 
@@ -243,7 +243,7 @@ Para cada día, el plan dice:
 | **Al servir** | Qué se come ahora y quién | «4 a la mesa; la de Pablo, apartada antes de la sal» |
 | **Al terminar** | Cuántas raciones van a cada sitio, para quién y para cuándo | «2 tuppers a la nevera: Javi, martes y miércoles · 3 al congelador, etiquetados con fecha» |
 
-Las reglas de reparto de la configuración se aplican aquí. Por ejemplo: el tupper de quien sale antes de que se cocine sale de la víspera o del congelador.
+Las reglas de reparto de la configuración se aplican aquí. Por ejemplo: el tupper de quien sale antes de que se cocine sale de lo cocinado la víspera o de algo ya preparado.
 
 **Plan B.** Cada día en que se come de algo guardado lleva una alternativa de **15 minutos como mucho**, con lo que hay en casa, por si lo guardado ya no está: *«Si no quedan lentejas: merluza del congelador a la plancha, 15 min»*. Quien cocina no informa, así que el plan B es lo que evita que se quede sin saber qué hacer.
 
@@ -258,14 +258,14 @@ Las reglas de reparto de la configuración se aplican aquí. Por ejemplo: el tup
 | # | Regla | Cómo se comprueba | Si falla |
 |---|---|---|---|
 | C1 | **Comensales** | Cada comida del alcance tiene a todos sus comensales según la configuración y los cambios de la actualización | Bloquea |
-| C2 | **Origen de cada ración** | Cada ración tiene origen (sesión, sobra de una sesión anterior o congelador) y las cuentas cuadran: lo producido o guardado es mayor o igual que lo que se come | Bloquea |
+| C2 | **Origen de cada ración** | Cada ración tiene origen (sesión, sobra de una sesión anterior o algo ya preparado de la nevera o el congelador) y las cuentas cuadran: lo producido o guardado es mayor o igual que lo que se come | Bloquea |
 | C3 | **Todo lo que se cocina tiene hueco** | Cada elaboración que no sale ya hecha está en una sesión con día, cocinero, hora de inicio y fin, dentro de una ventana disponible | Bloquea |
 | C4 | **Cada sesión cabe** | La simulación termina dentro de la ventana, con enfriar y guardar; respeta el techo; no solapa máquinas ni manos; cada plato está listo a su hora | Bloquea |
-| C5 | **Llega a tiempo de un día para otro** | Lo que se come un día se cocinó en una sesión anterior a esa comida. El tupper sale de la víspera o del congelador. Lo que tarda más que la ventana se come al día siguiente. Lo congelado tiene su descongelación apuntada la víspera | Bloquea |
+| C5 | **Llega a tiempo de un día para otro** | Lo que se come un día se cocinó en una sesión anterior a esa comida. El tupper sale de lo cocinado la víspera o de algo ya preparado. Lo que tarda más que la ventana se come al día siguiente. Lo congelado tiene su descongelación apuntada la víspera | Bloquea |
 | C6 | **Seguridad** | Ninguna receta incumple una restricción de quien la come ni las reglas de su etapa. Ninguna ración se come después del límite de `SEGURIDAD.md`. Los tuppers sin nevera respetan `SEGURIDAD.md` | Bloquea |
 | C7 | **Recetas completas** | Toda receta del plan está en el recetario, con cantidades para las raciones del plan y pasos con tiempos y máquina | Bloquea |
 | C8 | **Lo que caduca tiene salida** | Lo que caduca antes del fin de la semana planificada está en el plan, en las ideas, tiene salida (§7) o está propuesto al gestor | Bloquea |
-| C9 | **El congelador primero** | No se cocina un plato habiendo en el congelador raciones aptas para ese hueco, salvo motivo dicho | Avisa |
+| C9 | **Lo preparado primero** | No se cocina un plato habiendo raciones ya preparadas (en la nevera o en el congelador) aptas para ese hueco, salvo motivo dicho | Avisa |
 | C10 | **Variedad** | Repetición en la semana, platos recientes, ingrediente principal de la semana anterior y misma proteína en días seguidos, según la configuración | Si es estricta, bloquea; si no, avisa |
 | C11 | **Nutrición** | Raciones por grupo de alimentos en la semana (legumbre, pescado y azul, huevo, carne y roja, verdura) frente al criterio elegido, por grupo de personas. **Por grupos, nunca por calorías ni nutrientes** | Según el rigor: bloquea, avisa o informa |
 | C12 | **Preferencias** | Nadie recibe un plato que no le gusta sin alternativa para él | Avisa |
@@ -277,7 +277,7 @@ Formato del resultado:
 | | Regla | Resultado |
 |---|---|---|
 | ✓ | C3 Todo tiene hueco | 7 elaboraciones en 2 sesiones |
-| ✗ aviso | C9 Congelador primero | Quedan 2 raciones de albóndigas; el miércoles se cocina igualmente porque son para Pablo |
+| ✗ aviso | C9 Lo preparado primero | Quedan 2 raciones de albóndigas; el miércoles se cocina igualmente porque son para Pablo |
 
 ---
 
@@ -313,15 +313,15 @@ Enseñas lo que esperas que haya pasado según el plan, y el gestor **solo corri
 | # | Pregunta | Cómo la presentas |
 |---|---|---|
 | 1 | **¿Qué se cocinó y qué no?** | Los platos del plan, con ✓ por defecto |
-| 2 | **¿Qué queda cocinado?** | Las raciones que deberían quedar en nevera y congelador |
-| 3 | **¿Qué se acabó, qué sobra o qué hay que gastar ya?** Y si la compra no fue la de la lista, qué cambió | Más los básicos que probablemente se estén acabando |
+| 2 | **¿Qué queda preparado?** | Las raciones que deberían quedar, en la nevera y en el congelador |
+| 3 | **¿Qué se acabó, qué sobra o qué hay que gastar ya** en la nevera, el congelador o la despensa? Y si la compra no fue la de la lista, qué cambió | Lo que según el inventario caduca pronto y los básicos que probablemente se estén acabando |
 | 4 | **¿Qué cambia la semana que viene?** Quién come, viajes, invitados, festivos | — |
 
 Con eso: descuentas lo confirmado, reservas lo que queda de la semana en curso, actualizas las recetas hechas, apuntas en el histórico una línea de la semana y lo que se aprendió, y diseñas el plan nuevo. Lo que siga sin estar claro va a **una sola pregunta más**.
 
 Si el gestor dice algo del panel («estaba tachado esto», «el botón dice que sobraron 2»), cuéntalo como confirmado.
 
-**Si se salta una semana**, no inventas: preguntas lo mínimo para planificar (qué queda en el congelador y qué cambia) y marcas el resto del inventario *por confirmar*.
+**Si se salta una semana**, no inventas: preguntas lo mínimo para planificar (qué hay ya preparado, qué hay que gastar ya en la nevera, el congelador o la despensa, y qué cambia) y marcas el resto del inventario *por confirmar*.
 
 ### 13.3 Ajuste progresivo
 
