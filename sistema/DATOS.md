@@ -40,6 +40,7 @@ Al terminar una conversación en la que algo cambió, la IA entrega **completo**
 5. **Cantidades del inventario en su unidad natural** («2 pechugas», «medio paquete»), con una equivalencia aproximada en gramos o mililitros cuando sirva para cocinar (`"aprox_g": 400`).
 6. **Básicos de despensa** (aceite, sal, especias, vinagre…): sin cantidad, con `hay`, `poco` o `no hay`.
 7. **Nombres de personas**: el nombre o apodo, igual en todos los archivos.
+8. **Toda instrucción de guardar** (reparto, compra, sobras) dice **qué, cuánto, dónde, cómo y hasta cuándo** (`INSTRUCCIONES.md` §10.1). En el panel va como una frase completa en `guardar[]` de cada día y en `guardar` de cada artículo de la compra.
 
 ---
 
@@ -116,7 +117,7 @@ Ver `plantillas/semana.json`. Guarda:
 - `sesiones`: día, cocinero, inicio, fin, elaboraciones y línea de tiempo simulada;
 - `reparto`: víspera, antes de cocinar, al servir, al terminar;
 - `plan_b` por día, e `ideas`;
-- `comprobador`: el resultado de C1–C14;
+- `comprobador`: el resultado de C1–C15;
 - `compra`: la lista generada;
 - `cierre`: lo que pasó de verdad, se rellena en la actualización (qué se hizo, qué sobró, notas).
 
@@ -130,7 +131,7 @@ El panel (`plantillas/panel.html`) **no calcula nada**: pinta lo que recibe. La 
 | `semana` | `inicio`, `fin` y `titulo` |
 | `dias[]` | Por día: `fecha`, `ayer_listo[]`, `comidas[]` (cada una con `comida`, `hora` y `raciones[]` de `quien`, `plato`, `origen` y `aparte`), `sesiones[]` (`cocinero`, `inicio`, `fin`, `pasos[]` con `hora`, `paso`, `recurso` y `manos`), `guardar[]`, `manana[]`, `plan_b` e `ideas[]`. Un día sin nada: `"libre": "texto"` |
 | `recetas[]` | Fichas resumidas: `nombre`, `tipo`, `manos_min`, `total_min`, `maquina`, `raciones`, `estado`, `tiempos`, `en_semana`, `ingredientes[]`, `pasos[]`, `adaptaciones[]`, `conservacion` |
-| `compra` | `id` (único por compra), `titulo`, `fecha`, `tienda`, `revisar_en_casa[]` y `pasillos[]`, cada uno con `nombre` y `articulos[]` (`id`, `nombre`, `cantidad`, `para`, `etiqueta`) |
+| `compra` | `id` (único por compra), `titulo`, `fecha`, `tienda`, `revisar_en_casa[]` y `pasillos[]`, cada uno con `nombre` y `articulos[]` (`id`, `nombre`, `cantidad`, `para`, `etiqueta` y `guardar`: dónde va al llegar y hasta cuándo) |
 | `historico[]` | Por semana: `semana`, `planificado`, `hecho` y `nota` |
 | `inventario` | `preparado[]` (comida ya hecha, esté donde esté), `nevera[]`, `congelador[]` y `despensa[]`, cada uno con `nombre`, `cantidad` y `estado` (`ok`, `pronto`, `urgente` o `por confirmar`). En `preparado`, la `cantidad` dice también dónde está («3 raciones, congelador») |
 | `como_funciona` | `calendario[]` (`dia`, `que`, `quien`, `duracion`), `papeles[]`, `obligatorio[]`, `opcional[]`, `si_pasa[]` (`situacion`, `que_hacer`), `cambiar[]` y `primeras_semanas[]` |

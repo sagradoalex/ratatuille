@@ -1,5 +1,13 @@
 # Cambios
 
+## 1.2.1 · 2026-11-15
+
+- **Guardar, dicho entero.** Toda instrucción de guardar dice **qué, cuánto, dónde (nevera, congelador, despensa o fuera), cómo (recipiente, enfriado, aparte, etiqueta) y hasta cuándo**: al terminar cada sesión, al llegar de la compra, con las sobras y al descongelar.
+- Lo que no se vaya a usar antes de caducar en la nevera se dice que se congele, con el día de descongelarlo.
+- Nueva regla del comprobador: **C15 · Todo lo guardado, dicho entero**.
+- Etiquetado de todo lo cocinado que se guarda (`SEGURIDAD.md`).
+- Panel: cada artículo de la compra dice **dónde guardarlo al llegar**.
+
 ## 1.2.0 · 2026-11-15
 
 - **Todo el inventario, no solo el congelador.** El sistema pregunta y razona siempre, en este orden, por lo **ya preparado** (tuppers y sobras, en la nevera o en el congelador), la **nevera**, el **congelador** y la **despensa**.

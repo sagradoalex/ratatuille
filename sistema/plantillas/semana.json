@@ -29,7 +29,8 @@
     }
   ],
   "reparto": [
-    { "fecha": "AAAA-MM-DD", "momento": "vispera", "texto": "Pasar 2 raciones de … del congelador a la nevera" }
+    { "fecha": "AAAA-MM-DD", "momento": "vispera", "que": "…", "cuanto": "2 raciones", "donde": "del congelador a la nevera", "como": "en su tupper, tapado", "hasta": "se come mañana a mediodía" },
+    { "fecha": "AAAA-MM-DD", "momento": "al_terminar", "que": "…", "cuanto": "2 raciones", "donde": "nevera", "como": "tuppers individuales, ya frío, etiquetados con nombre y día", "hasta": "AAAA-MM-DD" }
   ],
   "plan_b": [
     { "fecha": "AAAA-MM-DD", "texto": "Si no queda …: … del congelador, 15 min" }
@@ -46,7 +47,7 @@
     "tienda": "",
     "revisar_en_casa": [],
     "pasillos": [
-      { "nombre": "Fruta y verdura", "articulos": [ { "nombre": "", "cantidad": "", "para": "", "etiqueta": false } ] }
+      { "nombre": "Fruta y verdura", "articulos": [ { "nombre": "", "cantidad": "", "para": "", "etiqueta": false, "guardar": "nevera, hasta el …" } ] }
     ]
   },
   "cierre": {

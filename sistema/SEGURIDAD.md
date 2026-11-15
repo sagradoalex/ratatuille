@@ -13,7 +13,8 @@
 | Enfriar lo cocinado | A la nevera **cuanto antes** y **nunca más de 2 horas** a temperatura ambiente. En raciones y en recipientes bajos, para que enfríe rápido | AESAN |
 | Cocinado en nevera | **3 días** como máximo, contando el día en que se cocina | Prudente del sistema |
 | Arroz y pasta cocinados | Enfriar enseguida y comer en **24 horas**. Recalentar una sola vez. *La toxina del* Bacillus cereus *no se destruye al recalentar: lo que la evita es enfriar rápido* | AESAN (riesgo); plazo prudente del sistema |
-| Congelado casero | Hasta **3 meses**, con etiqueta: qué es, cuántas raciones, fecha | Prudente del sistema (calidad) |
+| Congelado casero | Hasta **3 meses** | Prudente del sistema (calidad) |
+| Etiquetar lo que se guarda | Todo lo cocinado que se guarda, en la nevera o en el congelador, lleva etiqueta: **qué es, para quién (si va aparte), fecha de cocinado y fecha límite** | Prudente del sistema |
 | Descongelar | **En la nevera**, desde la víspera. Nunca a temperatura ambiente | Práctica general |
 | Lo descongelado | **No se vuelve a congelar** salvo que se cocine antes. Se come en 24 horas | Práctica general |
 | Recalentar | Hasta que esté muy caliente en todo el plato. **Una sola vez** | Práctica general |

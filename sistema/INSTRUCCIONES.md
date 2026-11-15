@@ -241,9 +241,32 @@ Para cada día, el plan dice:
 | **La víspera** | Qué pasar del congelador a la nevera | «Esta noche: 2 raciones de lentejas a la nevera» |
 | **Antes de cocinar** | Qué sacar y preparar | «Saca el pollo 20 min antes» |
 | **Al servir** | Qué se come ahora y quién | «4 a la mesa; la de Pablo, apartada antes de la sal» |
-| **Al terminar** | Cuántas raciones van a cada sitio, para quién y para cuándo | «2 tuppers a la nevera: Javi, martes y miércoles · 3 al congelador, etiquetados con fecha» |
+| **Al terminar** | Qué se guarda, cuánto, dónde, cómo y hasta cuándo (§10.1) | «Lentejas, 2 raciones → nevera, en 2 tuppers individuales, ya frías, etiquetadas “Javi mar” y “Javi mié”. Hasta el miércoles» |
 
 Las reglas de reparto de la configuración se aplican aquí. Por ejemplo: el tupper de quien sale antes de que se cocine sale de lo cocinado la víspera o de algo ya preparado.
+
+### 10.1 Cómo se dice «guardar»
+
+**Toda instrucción de guardar se dice entera**, sin dejar nada a la interpretación de quien la lee:
+
+| Parte | Qué dice | Ejemplo |
+|---|---|---|
+| **Qué** | El alimento o el plato | Lentejas con verduras |
+| **Cuánto** | Raciones, piezas o cantidad | 2 raciones de adulto |
+| **Dónde** | **Nevera**, **congelador**, **despensa** o fuera (frutero) | Nevera |
+| **Cómo** | Recipiente, si se enfría antes (`SEGURIDAD.md`), si va aparte (bebé, alergia) y la **etiqueta** | En 2 tuppers individuales, ya frías, etiquetadas «Javi mar» y «Javi mié» |
+| **Hasta cuándo** | El día en que se come o la fecha límite según `SEGURIDAD.md` | Hasta el miércoles |
+
+*«Lentejas, 2 raciones → nevera, en 2 tuppers individuales, ya frías, etiquetadas “Javi mar” y “Javi mié”. Hasta el miércoles.»*
+*«Lentejas, 1 ración → congelador, en tupper etiquetado “Lentejas · 2026-11-16”. Hasta el 2027-02-16.»*
+
+Se aplica en todos los sitios donde algo se guarda:
+- **al terminar cada sesión de cocina** (el reparto);
+- **al llegar de la compra**: dónde va cada artículo (§12);
+- **las sobras** que aparezcan fuera de lo previsto (§13.2);
+- **lo que se descongela**: cuándo pasa del congelador a la nevera y hasta cuándo se come.
+
+**Si algo no se va a usar antes de que caduque en la nevera, se dice que se congele**, y cuándo hay que descongelarlo. *«Muslos de pollo → congelador hoy mismo; pasar a la nevera el martes por la noche para el miércoles.»*
 
 **Plan B.** Cada día en que se come de algo guardado lleva una alternativa de **15 minutos como mucho**, con lo que hay en casa, por si lo guardado ya no está: *«Si no quedan lentejas: merluza del congelador a la plancha, 15 min»*. Quien cocina no informa, así que el plan B es lo que evita que se quede sin saber qué hacer.
 
@@ -271,6 +294,7 @@ Las reglas de reparto de la configuración se aplican aquí. Por ejemplo: el tup
 | C12 | **Preferencias** | Nadie recibe un plato que no le gusta sin alternativa para él | Avisa |
 | C13 | **Compra** | La lista es lo que pide el plan, menos lo que hay sin reservar, más los fijos. No lleva nada que ya haya. Lo *por confirmar* va a «Mira en casa antes de salir». Las cantidades van en formato de venta. Va por pasillos, con su semana y su fecha | Bloquea |
 | C14 | **Panel = plan** | Lo que dice el panel (Hoy, Semana, reparto, plan B, compra) coincide con el plan aprobado | Bloquea la publicación |
+| C15 | **Todo lo guardado, dicho entero** | Cada instrucción de guardar (al terminar cada sesión, al llegar de la compra, al descongelar) dice qué, cuánto, dónde, cómo y hasta cuándo (§10.1), y el «hasta cuándo» respeta `SEGURIDAD.md` | Bloquea |
 
 Formato del resultado:
 
@@ -290,6 +314,7 @@ Formato del resultado:
 5. Cada artículo dice **para qué es** (receta y día, o «fijo»).
 6. **«Revisar etiqueta»** en lo que suele llevar trazas de un alérgeno de la casa.
 7. Con dos compras a la semana, lo fresco del final de la semana va a la segunda.
+8. **Dónde va cada cosa al llegar**: cada artículo lleva su instrucción de guardar (§10.1). Lo que no se use antes de caducar en la nevera, al congelador ese día, con el día en que hay que descongelarlo.
 
 Cuando el gestor confirma la compra (o en la siguiente actualización), lo comprado entra en el inventario con la fecha de ese día.
 
@@ -318,6 +343,8 @@ Enseñas lo que esperas que haya pasado según el plan, y el gestor **solo corri
 | 4 | **¿Qué cambia la semana que viene?** Quién come, viajes, invitados, festivos | — |
 
 Con eso: descuentas lo confirmado, reservas lo que queda de la semana en curso, actualizas las recetas hechas, apuntas en el histórico una línea de la semana y lo que se aprendió, y diseñas el plan nuevo. Lo que siga sin estar claro va a **una sola pregunta más**.
+
+Si sobra algo que no estaba previsto, di cómo guardarlo según §10.1 y apúntalo en el inventario.
 
 Si el gestor dice algo del panel («estaba tachado esto», «el botón dice que sobraron 2»), cuéntalo como confirmado.
 

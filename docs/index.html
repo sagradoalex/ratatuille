@@ -130,7 +130,7 @@ html{scroll-behavior:smooth}
 </aside>
 
 <main>
-<p class="eyebrow">Ratatuille 1.2.0 · guía para revisar · 2026-11-15</p>
+<p class="eyebrow">Ratatuille 1.2.1 · guía para revisar · 2026-11-15</p>
 <h1>Ratatuille, planificador de cocina en casa</h1>
 <p class="lead">Una IA de pago (Claude o ChatGPT) que, cargada con unos archivos, planifica las comidas de una casa semana a semana. Esta guía explica quién lo usa, qué pasa en cada momento y qué reglas lo hacen fiable, para que puedas revisarlo antes de dárselo a nadie.</p>
 
@@ -308,7 +308,7 @@ html{scroll-behavior:smooth}
 <ol class="steps">
   <li><span class="n">1</span><span><b>Actualización</b> · gestor, día de planificación, 5 min, <span class="tag t-block">obligatoria</span>. Cuatro preguntas; la IA enseña lo que cree que pasó y el gestor solo corrige.</span></li>
   <li><span class="n">2</span><span><b>Plan de la semana siguiente</b> · IA. Siempre la semana siguiente, salvo que se diga otra cosa. Lo que queda de la semana en curso, reservado.</span></li>
-  <li><span class="n">3</span><span><b>Comprobador</b> · IA. 14 reglas; el resultado se enseña debajo del plan. El gestor aprueba o pide cambios (15 min con el paso 2).</span></li>
+  <li><span class="n">3</span><span><b>Comprobador</b> · IA. 15 reglas; el resultado se enseña debajo del plan. El gestor aprueba o pide cambios (15 min con el paso 2).</span></li>
   <li><span class="n">4</span><span><b>Panel publicado y compra</b> · comprador. Lista por pasillos, con «Mira en casa antes de salir» arriba.</span></li>
   <li><span class="n">5</span><span><b>Cocinar</b> · cocinero, siguiendo Hoy. No informa de nada.</span></li>
   <li><span class="n">6</span><span><b>Avisos sueltos</b> · gestor, <span class="tag t-ok">opcional</span>. «Cambio: …»; la IA ajusta, vuelve a pasar el comprobador y republica.</span></li>
@@ -333,10 +333,10 @@ html{scroll-behavior:smooth}
   <li><span class="n">4</span><span><b>Lo que hay que gastar</b>: lo ya preparado y lo que caduca, esté en la nevera, el congelador o la despensa, primero.</span></li>
   <li><span class="n">5</span><span><b>Recetas</b>: recetario de la casa → internet → creada por la IA. Siempre hay solución.</span></li>
   <li><span class="n">6</span><span><b>Sesiones</b>: cada elaboración a un hueco con día, cocinero y horas, y <b>simulación</b> de cada sesión.</span></li>
-  <li><span class="n">7</span><span><b>Reparto y plan B</b>: víspera, antes de cocinar, al servir, al terminar.</span></li>
+  <li><span class="n">7</span><span><b>Reparto y plan B</b>: víspera, antes de cocinar, al servir, al terminar. Todo lo que se guarda dice <b>qué, cuánto, dónde (nevera, congelador o despensa), cómo y hasta cuándo</b>.</span></li>
   <li><span class="n">8</span><span><b>Ideas</b> para las comidas que no se planifican.</span></li>
   <li><span class="n">9</span><span><b>Desayunos y meriendas</b> como rotación, si entran.</span></li>
-  <li><span class="n">10</span><span><b>Comprobador</b> C1–C14.</span></li>
+  <li><span class="n">10</span><span><b>Comprobador</b> C1–C15.</span></li>
   <li><span class="n">11</span><span><b>Compra</b>: plan − lo que hay sin reservar + fijos, en formato de venta y por pasillos.</span></li>
   <li><span class="n">12</span><span><b>Panel</b>, y C14: que diga lo mismo que el plan.</span></li>
 </ol>
@@ -345,7 +345,7 @@ html{scroll-behavior:smooth}
 <p>Abre el panel: se abre en <b>Hoy</b>. Lee en orden: qué quedó listo ayer → qué se come hoy, cada persona en su línea → <b>línea de tiempo con horas</b> (qué hacen las manos y qué hace cada máquina) → qué guardar al terminar → qué dejar para mañana → plan B. Si quiere, pulsa «hecho» y cuántas raciones sobraron; nadie depende de ello.</p>
 
 <h3>F7 · La compra (comprador)</h3>
-<p>Pestaña <b>Compra</b>: primero «Mira en casa antes de salir»; después, los pasillos en orden de recorrido. Cada artículo dice cantidad en formato de venta y para qué es. Se tacha (lo tachado baja al final de su pasillo), se marca «ya lo tengo» o se copia la lista entera o solo lo que falta para WhatsApp.</p>
+<p>Pestaña <b>Compra</b>: primero «Mira en casa antes de salir»; después, los pasillos en orden de recorrido. Cada artículo dice cantidad en formato de venta, para qué es y <b>dónde guardarlo al llegar</b> (y si hay que congelarlo ese día). Se tacha (lo tachado baja al final de su pasillo), se marca «ya lo tengo» o se copia la lista entera o solo lo que falta para WhatsApp.</p>
 
 <h3>F8 · Actualizar a una versión nueva</h3>
 <p>Se sustituye <code>sistema/</code> (y <code>LEEME.md</code>, <code>VERSION</code> y <code>CAMBIOS.md</code>). Los datos de la casa no se tocan. En la conversación siguiente, la IA compara versiones y explica en dos líneas qué cambia.</p>
@@ -380,9 +380,10 @@ html{scroll-behavior:smooth}
 
 <!-- ============ REGLAS ============ -->
 <h2 id="reglas">Reglas que lo sostienen</h2>
-<div class="grid three">
+<div class="grid two">
   <div class="box"><h3>Un plan no es un hecho</h3><p style="margin:0">Nada se descuenta porque estuviera previsto. Solo con confirmación del gestor, o deducido de algo confirmado.</p></div>
   <div class="box"><h3>Todo tiene un hueco</h3><p style="margin:0">Cada cosa que se cocina, acompañamientos incluidos, va en una sesión con día, cocinero y horas, y la sesión se simula. Si no cabe, el plan no sirve.</p></div>
+  <div class="box"><h3>Guardar, dicho entero</h3><p style="margin:0">Todo lo que se guarda dice qué, cuánto, dónde (nevera, congelador o despensa), cómo y hasta cuándo. Al terminar de cocinar y al llegar de la compra.</p></div>
   <div class="box"><h3>Cada uno, su plato</h3><p style="margin:0">Quien come distinto (bebé, alergia, dieta) tiene su propia línea en todo: plan, panel y reparto.</p></div>
 </div>
 
@@ -418,6 +419,7 @@ html{scroll-behavior:smooth}
 <tr><td class="id">C12</td><td>Preferencias</td><td>Nadie recibe algo que no le gusta sin alternativa</td><td><span class="tag t-warn">avisa</span></td></tr>
 <tr><td class="id">C13</td><td>Compra</td><td>Plan − lo que hay + fijos; formato de venta; por pasillos</td><td><span class="tag t-block">bloquea</span></td></tr>
 <tr><td class="id">C14</td><td>Panel = plan</td><td>Lo que dice el panel es lo aprobado</td><td><span class="tag t-block">bloquea</span></td></tr>
+<tr><td class="id">C15</td><td>Todo lo guardado, dicho entero</td><td>Cada «guardar» dice qué, cuánto, dónde, cómo y hasta cuándo</td><td><span class="tag t-block">bloquea</span></td></tr>
 </tbody></table></div>
 
 <!-- ============ PLATAFORMAS ============ -->
@@ -437,7 +439,7 @@ html{scroll-behavior:smooth}
 <p>En <a href="https://github.com/sagradoalex/ratatuille">github.com/sagradoalex/ratatuille</a>. Sin datos personales ni recetas reales: el panel trae una familia inventada. <a href="panel-ejemplo.html">Ver el panel de ejemplo</a>.</p>
 <pre class="tree">ratatuille/
 ├── LEEME.md             cómo empezar, en una página
-├── VERSION · CAMBIOS.md 1.2.0
+├── VERSION · CAMBIOS.md 1.2.1
 └── sistema/             se sustituye entero al actualizar
     ├── ARRANQUE.md      para las instrucciones del proyecto
     ├── INSTRUCCIONES.md cómo piensa: semana, jerarquía, recetas, sesiones, comprobador, compra, panel
@@ -466,7 +468,7 @@ html{scroll-behavior:smooth}
 </tbody></table></div>
 <div class="note red"><b>Dos puntos que conviene que mires tú:</b> los <b>factores de ración por edad</b> son orientativos del sistema, no cifras oficiales; y los plazos de <b>3 días en nevera</b> y <b>24 horas para el arroz</b> son valores prudentes, porque no hay un plazo oficial en días. El resto de la seguridad está contrastado con AESAN y la AEP.</div>
 
-<footer>Ratatuille 1.2.0 · <a href="https://github.com/sagradoalex/ratatuille">Código y documentos</a> · <a href="panel-ejemplo.html">Panel de ejemplo</a> · Licencia CC BY-NC 4.0</footer>
+<footer>Ratatuille 1.2.1 · <a href="https://github.com/sagradoalex/ratatuille">Código y documentos</a> · <a href="panel-ejemplo.html">Panel de ejemplo</a> · Licencia CC BY-NC 4.0</footer>
 </main>
 </div>
 

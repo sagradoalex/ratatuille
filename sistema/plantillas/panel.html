@@ -162,7 +162,7 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
           { "hora": "12:15", "paso": "Enfriar, repartir y guardar (ver «Al terminar»)", "recurso": "manos", "manos": true }
         ] }
       ],
-      "guardar": ["2 tuppers de lentejas a la nevera: Javi martes y miércoles", "1 ración de lentejas a la nevera: Marta y Pablo, martes", "1 ración al congelador, con etiqueta y fecha"],
+      "guardar": ["Lentejas, 2 raciones → nevera, en 2 tuppers individuales, ya frías (antes de 2 h), etiquetadas «Javi mar» y «Javi mié». Hasta el miércoles", "Lentejas, 1 ración de Marta → nevera, en tupper. Para el martes", "Lentejas de Pablo, sin sal, 1 ración → nevera, en su tupper, aparte y etiquetado «Pablo mar». Para el martes", "Lentejas, 1 ración → congelador, en tupper etiquetado «Lentejas · 16-nov». Hasta el 16 de febrero"],
       "manana": ["Nada que descongelar"],
       "plan_b": "Si las lentejas no salen a tiempo: tortilla francesa con pan y tomate, 10 min",
       "ideas": []
@@ -179,7 +179,7 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
       ],
       "sesiones": [],
       "guardar": [],
-      "manana": ["Esta noche: pasar 1 bandeja de pollo del congelador a la nevera"],
+      "manana": ["Esta noche: muslos de pollo, 1 bandeja → del congelador a la nevera, en un plato hondo, tapados. Se cocinan mañana"],
       "plan_b": "Si no quedan lentejas: merluza del congelador a la plancha con arroz, 15 min",
       "ideas": ["Cena: hummus con crudités (gasta el bote de garbanzos que caduca)"]
     },
@@ -203,7 +203,7 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
           { "hora": "12:15", "paso": "Enfriar, repartir y guardar", "recurso": "manos", "manos": true }
         ] }
       ],
-      "guardar": ["2 raciones de pollo a la nevera: Marta y Javi (tupper), jueves", "1 ración de Pablo a la nevera, jueves"],
+      "guardar": ["Pollo con boniato, 2 raciones → nevera, en tuppers, ya frío, etiquetados «Marta jue» y «Javi jue». Para el jueves", "Pollo de Pablo, sin sal, 1 ración → nevera, en su tupper, aparte y etiquetado «Pablo jue». Para el jueves"],
       "manana": ["Nada que descongelar"],
       "plan_b": "Si el pollo no está bien descongelado: huevos revueltos con judías verdes, 10 min",
       "ideas": []
@@ -220,7 +220,7 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
       ],
       "sesiones": [],
       "guardar": [],
-      "manana": ["Esta noche: pasar la merluza del congelador a la nevera"],
+      "manana": ["Esta noche: merluza, 2 lomos → del congelador a la nevera, en un plato, tapados. Se cocinan mañana"],
       "plan_b": "Si no queda pollo: la ración de lentejas del congelador (pasarla por la mañana a la nevera y calentarla bien)",
       "ideas": []
     },
@@ -243,7 +243,7 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
           { "hora": "12:00", "paso": "Recoger", "recurso": "manos", "manos": true }
         ] }
       ],
-      "guardar": ["Nada: se come todo hoy"],
+      "guardar": ["Nada: se come todo hoy. Si sobra algo, a la nevera en tupper, ya frío, y se come como mucho mañana"],
       "manana": [],
       "plan_b": "Si la merluza no está descongelada: tortilla de patata, 20 min",
       "ideas": []
@@ -273,23 +273,23 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
     "revisar_en_casa": [ { "nombre": "Arroz", "nota": "¿Queda medio paquete? Si no, 1 kg" }, { "nombre": "Comino", "nota": "Para el hummus" } ],
     "pasillos": [
       { "nombre": "Fruta y verdura", "articulos": [
-        { "id": "a1", "nombre": "Boniato", "cantidad": "1 kg", "para": "Pollo al horno (miércoles)" },
-        { "id": "a2", "nombre": "Judías verdes", "cantidad": "1 bolsa de 500 g", "para": "Pollo al horno (miércoles)" },
-        { "id": "a3", "nombre": "Zanahoria", "cantidad": "1 bolsa de 1 kg", "para": "Lentejas (lunes) y hummus" },
-        { "id": "a4", "nombre": "Plátanos", "cantidad": "1 kg", "para": "Fijo" }
+        { "id": "a1", "nombre": "Boniato", "cantidad": "1 kg", "para": "Pollo al horno (miércoles)", "guardar": "Despensa, en sitio fresco y oscuro" },
+        { "id": "a2", "nombre": "Judías verdes", "cantidad": "1 bolsa de 500 g", "para": "Pollo al horno (miércoles)", "guardar": "Nevera, cajón de la verdura. Hasta el miércoles" },
+        { "id": "a3", "nombre": "Zanahoria", "cantidad": "1 bolsa de 1 kg", "para": "Lentejas (lunes) y hummus", "guardar": "Nevera, cajón de la verdura" },
+        { "id": "a4", "nombre": "Plátanos", "cantidad": "1 kg", "para": "Fijo", "guardar": "Fuera de la nevera, en el frutero" }
       ] },
       { "nombre": "Panadería", "articulos": [
-        { "id": "b1", "nombre": "Pan de molde", "cantidad": "1 paquete", "para": "Fijo", "etiqueta": true }
+        { "id": "b1", "nombre": "Pan de molde", "cantidad": "1 paquete", "para": "Fijo", "etiqueta": true, "guardar": "Despensa. Si no se acaba en 5 días, congelar la mitad" }
       ] },
       { "nombre": "Carne y pescado", "articulos": [
-        { "id": "c1", "nombre": "Muslos de pollo", "cantidad": "1 bandeja de 1 kg", "para": "Pollo al horno (miércoles); va al congelador hasta el martes" }
+        { "id": "c1", "nombre": "Muslos de pollo", "cantidad": "1 bandeja de 1 kg", "para": "Pollo al horno (miércoles)", "guardar": "Congelador hoy mismo. Pasar a la nevera el martes por la noche" }
       ] },
       { "nombre": "Lácteos y huevos", "articulos": [
-        { "id": "d1", "nombre": "Huevos", "cantidad": "1 docena", "para": "Plan B e ideas de cena" },
-        { "id": "d2", "nombre": "Yogures naturales", "cantidad": "8", "para": "Fijo" }
+        { "id": "d1", "nombre": "Huevos", "cantidad": "1 docena", "para": "Plan B e ideas de cena", "guardar": "Nevera" },
+        { "id": "d2", "nombre": "Yogures naturales", "cantidad": "8", "para": "Fijo", "guardar": "Nevera" }
       ] },
       { "nombre": "Despensa", "articulos": [
-        { "id": "e1", "nombre": "Lentejas pardinas", "cantidad": "1 paquete de 1 kg", "para": "Lentejas (lunes)" }
+        { "id": "e1", "nombre": "Lentejas pardinas", "cantidad": "1 paquete de 1 kg", "para": "Lentejas (lunes)", "guardar": "Despensa" }
       ] }
     ]
   },
@@ -518,7 +518,7 @@ footer{max-width:980px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);fo
         h += '<div class="item ' + (st === "cogido" ? "got" : st === "tengo" ? "have" : "") + '"><input type="checkbox" id="art-' + esc(a.id) + '" data-id="' + esc(a.id) + '"' + (st ? " checked" : "") + '>' +
           '<label class="t" for="art-' + esc(a.id) + '"><span class="q">' + esc(a.nombre) + '</span> — ' + esc(a.cantidad) +
           (a.etiqueta ? ' <span class="pill warn">revisar etiqueta</span>' : '') + (st === "tengo" ? ' <span class="pill info">ya lo tenía</span>' : '') +
-          '<br><span class="muted small">' + esc(a.para) + '</span></label>' +
+          '<br><span class="muted small">' + esc(a.para) + '</span>' + (a.guardar ? '<br><span class="small">🏠 Al llegar: ' + esc(a.guardar) + '</span>' : '') + '</label>' +
           (st ? '' : '<button type="button" class="have-btn" data-tengo="' + esc(a.id) + '">Ya lo tengo</button>') + '</div>';
       });
       h += '</div>';
